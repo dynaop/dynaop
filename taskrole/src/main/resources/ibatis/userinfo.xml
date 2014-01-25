@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.user.entity.UserInfo">
+ 	<typeAlias alias="user" type="com.dynaop.taskrole.user.entity.UserInfo"/>
+ 	
+ 	<select id="checkLogin" resultClass="integer" parameterClass="map">
+ 		select count(*) from t_login
+ 		where username=#username# 
+ 		<isNotEmpty prepend="and" property="pwd">
+ 			 password=#pwd#
+ 		</isNotEmpty>
+ 	</select>
+ 	<insert id="saveLogin" parameterClass="map">
+ 		insert into t_login values(#id#,#username#,#password#)
+ 	</insert>
+ 	<insert id="saveUserInfo" parameterClass="user">
+ 		insert into t_userinfo values(#id#,#loginId#,#username#,#email#,#qq#,#deptId#)
+ 	</insert>
+ 	<!-- <sql id="queryWhere">
+ 		<dynamic prepend="where">
+ 			<isNotEmpty prepend=" and" property="loginname">
+ 				loginname like concat('%',#loginname#,'%')
+ 			</isNotEmpty>
+ 		</dynamic>
+ 	</sql>
+ 	
+ 	<select id="queryEmp" resultClass="emp" parameterClass="com.blueray.demo.vo.EmpQueryParam">
+ 		select id,loginname,name,age,gender,str_to_date(birthday,'%Y-%m-%d') birthday ,salary,str_to_date(createtime,'%Y-%m-%d') createtime
+ 		from t_employee
+		<include refid="queryWhere"/> 	
+ 		  <isNotEmpty prepend="" property="sortField">
+ 			order by $sortField$ $sortOrder$ 				
+ 		</isNotEmpty>	
+ 		LIMIT #paging.startRecord#,#paging.endRecord#
+ 	</select>
+ 	
+	<select id="queryEmp_count" resultClass="java.lang.Integer" parameterClass="com.blueray.demo.vo.EmpQueryParam">
+ 		select count(1) from t_employee
+		<include refid="queryWhere"/> 	
+ 	</select>
+ 	
+ 	<insert id="saveEmp" parameterClass="java.util.HashMap">
+ 		insert into t_employee (id, loginname, name, age,  gender, birthday, createtime, salary)
+           values(#id#, #loginname#, #name#, #age#, #gender#, #birthday#, #createtime#, #salary#)
+ 	</insert>
+
+	<update id="updateEmp"  parameterClass="java.util.HashMap">
+		update t_employee set loginname=#loginname#,name=#name#,age=#age#,gender=#gender#,
+					   birthday=#birthday#,salary=#salary#
+					   
+		where id=#id#
+	</update>
+	
+	<delete id="deleteEmp" parameterClass="java.lang.String">
+		delete from t_employee where id=#id#
+	</delete> -->
+ </sqlMap>
