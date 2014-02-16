@@ -6,8 +6,10 @@
 	<package name="main" extends="default" namespace="/dynaop">
 		<action name="main" class="mainAction" method="init">
 			<result name="success">/pages/main.jsp</result>
+			<result name="main">/pages/main_list.jsp</result>
 		</action>		
 		<action name="menuTree" class="mainAction" method="menuTree">
 		</action>	
+		<!-- <action name="nextMenu" class="mainAction" method="menuTree"></action> -->
 	</package>
 </struts>

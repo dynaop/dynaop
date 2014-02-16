@@ -5,7 +5,7 @@
 <html lang="utf-8">
 <head>
 	<meta charset="UTF-8">
-	<title>Full Layout - jQuery EasyUI Demo</title>
+	<title>222Full Layout - jQuery EasyUI Demo</title>
 	<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body class="easyui-layout" style="width:100%;height:100%;">

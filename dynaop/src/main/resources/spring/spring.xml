@@ -34,13 +34,14 @@
  <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
   <!-- 本地链接方式 -->
-<!--   <property name="url" value="jdbc:mysql://localhost:3306/dynaop?useUnicode=true&amp;characterEncoding=utf-8"/>
+ <property name="url" value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8"/>
  <property name="username" value="root"/>
-  <property name="password" value="123456"/> -->
+  <property name="password" value="root"/> 
    <!-- BAE链接方式 -->
-  <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
+ <!-- <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
   <property name="username" value="1XYcWi8AjGmk9UuMa7SPepc8"/>
   <property name="password" value="mFbv3l1iKUGetLW8oUOUP7uMNFcM8vT1"/>
+   --> 
    <!-- SAE链接方式 -->
 <!--    <property name="url" value="jdbc:mysql://${SAE_MYSQL_HOST_M}:${SAE_MYSQL_HOST_S}/${SAE_MYSQL_DB}"/>
   <property name="username" value="${SAE_MYSQL_USER}"/>
@@ -51,13 +52,13 @@
  <bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource">
   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
   <!-- 本地链接方式 -->
-<!--   <property name="url" value="jdbc:mysql://localhost:3306/dynaop?useUnicode=true&amp;characterEncoding=utf-8"/>
+  <property name="url" value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8"/>
  <property name="username" value="root"/>
-  <property name="password" value="123456"/> -->
+  <property name="password" value="root"/> 
    <!-- BAE链接方式 -->
-  <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
+ <!--  <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
   <property name="username" value="1XYcWi8AjGmk9UuMa7SPepc8"/>
-  <property name="password" value="mFbv3l1iKUGetLW8oUOUP7uMNFcM8vT1"/>
+  <property name="password" value="mFbv3l1iKUGetLW8oUOUP7uMNFcM8vT1"/>-->
    <!-- SAE链接方式 -->
 <!--     <property name="url" value="jdbc:mysql://${SAE_MYSQL_HOST_M}:${SAE_MYSQL_HOST_S}/${SAE_MYSQL_DB}"/>
   <property name="username" value="${SAE_MYSQL_USER}"/>

@@ -6,6 +6,7 @@
 	<package name="user" extends="default" namespace="/user">
 		<action name="login" class="userLoginAction" method="login">
 			<result name="success">/pages/main.jsp</result>
+			<result name="main">/pages/main_list.jsp</result>
 			<result name="login">/pages/user/login.jsp</result>
 		</action>	
 		<action name="regInit" class="userLoginAction" method="regInit">

@@ -11,6 +11,7 @@
 		<spring.version>3.2.6.RELEASE</spring.version>
 		<struts2-spring-plugin.version>2.3.16</struts2-spring-plugin.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -155,6 +156,15 @@
 
 				</configuration>
 			</plugin>
+			<plugin>
+          		<groupId>org.apache.tomcat.maven</groupId>
+          		<artifactId>tomcat6-maven-plugin</artifactId>
+         		<version>2.2</version>
+         		<configuration> 
+              		<url>http://localhost:8080/manager/html</url>   
+             		<server>tomcat</server>  
+           		</configuration>  
+       		</plugin>
 		</plugins>
 	</build>
 

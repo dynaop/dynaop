@@ -38,7 +38,7 @@ public class UserLoginAction extends BaseAction {
 		//session中找到用户登录凭证，将不再登录
 		Map<String,Object> sessionMap = ActionContext.getContext().getSession();
 		if(StringUtils.isNotBlank((String)sessionMap.get(Constants.sessionKey))){
-			return SUCCESS;
+			return "main";
 		}
 		//未登录过的用户需要进行登陆操作
 		if(userInfo==null){
@@ -52,7 +52,7 @@ public class UserLoginAction extends BaseAction {
 			return Action.LOGIN;
 		}
 		sessionMap.put(Constants.sessionKey, userInfo.getUsername());
-		return SUCCESS;
+		return "main";
 	}
 	//注册界面初始化
 	public String regInit(){
