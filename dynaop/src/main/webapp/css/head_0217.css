@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+.head_height{
+	max-height:59px;
+	/*background:#FFDFDA;*/
+	padding:0px 15px ;
+}
+
+.head_height2{
+	max-height:30px;
+	background:#B3DFDA;
+	padding:0px 0px;
+	
+}
+.head_exit{
+	height:60px;
+	margin-right:10px;
+	padding:43px 0px 0px 155px;
+}

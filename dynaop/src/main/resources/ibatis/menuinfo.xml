@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.menus.entity.MenuInfo">
+ 	<typeAlias alias="menu" type="com.dynaop.taskrole.menus.entity.MenuInfo"/>
+ 	
+ 	<select id="getMenusList" resultClass="menu" parameterClass="java.util.HashMap">
+ 		select  ID,MENU_ID,PARENT_ID,MENU_NAME_ZH,MENU_URI from t_menu
+ 		where 1=1 
+ 		 	<isNotEmpty prepend="and" property="parent_id">
+ 				PARENT_ID=#parent_id#
+ 			</isNotEmpty>
+ 			<isNull prepend="and" property="parent_id">
+ 				PARENT_ID is null
+ 			</isNull>
+ 	</select>
+ 	
+ </sqlMap>
