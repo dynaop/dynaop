@@ -7,22 +7,12 @@
  	
  	<insert id="createMissionInfo" parameterClass="mission">
  		insert into t_mission_info (id,mission_name,desc,plan_time,time_unit,start_time,end_time,mission_level,creator)
- 		values(#id#,#mission_name#,#desc#,#plan_time#,#time_unit#,#start_time#,#end_time#,mission_level#,#creator#)
+ 		values(#id#,#mission_name#,#desc#,#plan_time#,#time_unit#,#start_time#,#end_time#,#mission_level#,#creator#)
  	</insert>
  	
  	<insert id="saveCurrentMisson" parameterClass="java.util.HashMap">
  		insert into t_mission_current (id,mission_id,current_state,current_executor,current_time)
  		values(#id#,#mission_id#,#current_state#,#current_executor#,now())
  	</insert>
- 	<select id="getMenusList" resultClass="menu" parameterClass="java.util.HashMap">
- 		select  ID,MENU_ID,PARENT_ID,MENU_NAME_ZH,MENU_URI from t_menu
- 		where 1=1 
- 		 	<isNotEmpty prepend="and" property="parent_id">
- 				PARENT_ID=#parent_id#
- 			</isNotEmpty>
- 			<isNull prepend="and" property="parent_id">
- 				PARENT_ID is null
- 			</isNull>
- 	</select>
  	
  </sqlMap>
