@@ -1,10 +1,13 @@
 package com.dynaop.taskrole.mission.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.dynaop.taskrole.common.dao.MethodName4StatemenDaoHandler;
+import com.dynaop.taskrole.common.dao.Page;
+import com.dynaop.taskrole.common.entity.QueryParamsByUserName;
 import com.dynaop.taskrole.mission.entity.MissionInfo;
 /**
  * @author huangjianghua(ivanhuang81@gmail.com)
@@ -23,6 +26,15 @@ public class MissionInfoDaoImpl extends MethodName4StatemenDaoHandler<MissionInf
 
 	public void saveCurrentMisson(Map map) {
 		this.save(map);
+	}
+
+	public List<MissionInfo> getMisList(String userName,int currentPage,int pages,int pageSize) {
+		QueryParamsByUserName qpbu = new QueryParamsByUserName();
+		qpbu.setUserName(userName);
+		Page page = new Page(currentPage,pageSize);
+		qpbu.setPaging(page);
+		List<MissionInfo> list = this.query(qpbu);
+		return list;
 	}
 
 	

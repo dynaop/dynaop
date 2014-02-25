@@ -35,7 +35,6 @@ public class MainAction extends BaseAction {
 	public void menuTree(){
 		List<Map> menuList = menusService.getLeftMenuList(null);
 		String menu=JSON.toJSONString(menuList);
-		System.out.println("###   "+menu);
 		this.sendJson(menu);
 	}
 }

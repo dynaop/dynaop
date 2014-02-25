@@ -6,6 +6,7 @@
 	<settings cacheModelsEnabled="true" enhancementEnabled="true"
 		lazyLoadingEnabled="false" errorTracingEnabled="true" maxTransactions="100"
 		maxRequests="320" maxSessions="100" useStatementNamespaces="true" />
+	<sqlMap resource="ibatis/info.xml" />
 	<sqlMap resource="ibatis/userinfo.xml" />
 	<sqlMap resource="ibatis/menuinfo.xml" />
 	<sqlMap resource="ibatis/mission.xml" />

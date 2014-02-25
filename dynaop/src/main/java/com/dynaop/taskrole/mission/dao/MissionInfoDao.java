@@ -1,5 +1,6 @@
 package com.dynaop.taskrole.mission.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.dynaop.taskrole.mission.entity.MissionInfo;
@@ -15,10 +16,15 @@ public interface MissionInfoDao {
 	 */
 	public void createMissionInfo(MissionInfo missionInfo);
 	
-	public void updateMissionInfo(MissionInfo missionInfo);
 	/**
 	 * 将新创建的任务插入到当前任务表t_mission_current中
 	 */
 	public void saveCurrentMisson(Map map);
-
+	
+	/**
+	 * 通过用户名获取用户当前活动的任务，包括创建和分配的,分页显示
+	 * @param userName
+	 * @return 
+	 */
+	public List<MissionInfo> getMisList(String userName,int currentPage,int pages,int pageSize);
 }

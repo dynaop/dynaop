@@ -105,8 +105,8 @@
 			if ($('#tt').tabs('exists', title)){
 				$('#tt').tabs('select', title);
 			} else {
-				var content = '<iframe scrolling="auto" frameborder="0"  src="${ctx}'+childObj+'" style="width:100%;height:100%;min-height:200px;overflow:hidden; " ></iframe>';
-				
+			//	var content = '<iframe scrolling="auto" frameborder="0"  src="${ctx}'+childObj+'" style="width:100%;height:100%;min-height:200px;overflow:hidden; " ></iframe>';
+				var content = '<iframe width="100%" height="100%"  src="${ctx}'+childObj+'" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" frameborder="0"  scrolling="yes" style="overflow-y: auto; overflow-x: auto;"> </iframe>';
 				$('#tt').tabs('add',{
 					title:title,
 					content:content,

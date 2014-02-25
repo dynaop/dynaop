@@ -48,7 +48,7 @@ public class UserLoginAction extends BaseAction {
 		param.put("username", userInfo.getUsername());
 		param.put("pwd", userInfo.getPwd());
 		if(!userInfoService.checkLogin(param)){
-			this.setMsg("用户名或者密码错误，请重新登录！");
+			this.setMsg("username or password error,please input again!");
 			return Action.LOGIN;
 		}
 		sessionMap.put(Constants.sessionKey, userInfo.getUsername());

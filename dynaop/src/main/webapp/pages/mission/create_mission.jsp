@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>	
 <%@ include file="../common.jsp"%>
 <!DOCTYPE html>
 <html lang="utf-8">
@@ -8,15 +9,13 @@
 <title>创建任务</title>
 <jsp:include page="../head.jsp"></jsp:include>
 </head>
-<script type="text/javascript">
-
-</script>
 <body>
+<s:property value="createResult"/>
 
 	<div class="container">
 		<div class="col-md-offset-1 ">
 			<h4 class="form-signin-heading">创建任务</h4>
-		<form class="form-horizontal" action="${ctx}/mission/create.action" method="post">
+		<form id="misForm" class="form-horizontal" action="${ctx}/mission/create.action" method="post" >
 		
 			<fieldset>
 			<div class="form-group">

@@ -1,5 +1,7 @@
 package com.dynaop.taskrole.mission.service;
 
+import java.util.List;
+
 import com.dynaop.taskrole.mission.entity.MissionInfo;
 
 
@@ -15,8 +17,12 @@ public interface MissionInfoService {
 	 */
 	public void saveMissionInfo(MissionInfo mission) throws Exception;
 	
+	/**
+	 * 获取当前用户活动任务列表
+	 * @param userID
+	 * @throws Exception
+	 */
+	public List<MissionInfo> getMissionList(String userName,int currentPage,int pages,int pageSize) throws Exception ;
 	
 	
-	public void updateMissionInfo(MissionInfo mission);
-
 }

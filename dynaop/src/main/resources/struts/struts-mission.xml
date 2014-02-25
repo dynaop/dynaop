@@ -10,10 +10,11 @@
 		</action>
 		
 		<action name="create" class="missionAction" method="createMission">
-			<result name="success">/pages/success.jsp</result>
-			<result name="error">/pages/error.jsp</result>
+			<result name="success">/pages/mission/create_mission.jsp</result>
 		</action>	
-					
+		<action name="misList" class="missionAction" method="listMission">
+			<result name="success">/pages/mission/mission_list.jsp</result>
+		</action>					
 		<!--<action name="login" class="userLoginAction" method="login">
 			<result name="success">/pages/main.jsp</result>
 			<result name="main">/pages/main_list.jsp</result>

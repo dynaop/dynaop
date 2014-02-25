@@ -6,13 +6,30 @@
  	<typeAlias alias="mission" type="com.dynaop.taskrole.mission.entity.MissionInfo"/>
  	
  	<insert id="createMissionInfo" parameterClass="mission">
- 		insert into t_mission_info (id,mission_name,desc,plan_time,time_unit,start_time,end_time,mission_level,creator)
- 		values(#id#,#mission_name#,#desc#,#plan_time#,#time_unit#,#start_time#,#end_time#,#mission_level#,#creator#)
- 	</insert>
+ 		insert into t_mission_info (id,mission_name,descr,plan_time,time_unit,start_time,end_time,mission_level,creator)
+ 		values(#id#,#mission_name#,#descr:VARCHAR:NULL#,#plan_time#,#time_unit#,#start_time#,#end_time#,#mission_level#,#creator#)
+ 	</insert> 
  	
  	<insert id="saveCurrentMisson" parameterClass="java.util.HashMap">
- 		insert into t_mission_current (id,mission_id,current_state,current_executor,current_time)
- 		values(#id#,#mission_id#,#current_state#,#current_executor#,now())
+ 		insert into t_mission_current (id,mission_id,curr_state,curr_executor,curr_time)
+ 		values(#id#,#mission_id#,#curr_state#,#curr_executor:VARCHAR:NULL#,now())
  	</insert>
+ 	
+ 	
+ 	<select id="getMisList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="mission">
+ 		select i.ID,i.MISSION_NAME,i.CREATOR,i.MISSION_LEVEL,i.PLAN_TIME,i.TIME_UNIT,i.START_TIME,i.END_TIME,i.DESCR 
+ 		from t_mission_info i,t_mission_current c
+		where (i.CREATOR=#userName# or c.CURR_EXECUTOR=#userName#) 
+		and i.ID=c.MISSION_ID 
+		ORDER BY i.START_TIME DESC
+		LIMIT #paging.startRecord#,#paging.endRecord#
+ 	</select>
+ 	<select id="getMisList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+ 		select count(1)
+ 		from t_mission_info i,t_mission_current c
+		where (i.CREATOR=#userName# or c.CURR_EXECUTOR=#userName#) 
+		and i.ID=c.MISSION_ID 
+		ORDER BY i.START_TIME DESC
+ 	</select>
  	
  </sqlMap>

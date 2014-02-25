@@ -4,6 +4,7 @@
 package com.dynaop.taskrole.mission.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -24,20 +25,22 @@ public class MissionInfoServiceImpl implements MissionInfoService {
 
 
 	public void saveMissionInfo(MissionInfo mission) throws Exception{
-		Map<String,String> missionMap = new HashMap<String,String>();		
+		Map<String,String> missionMap = new HashMap<String,String>();	
+		
+		String id = UUID.randomUUID().toString();
+		mission.setId(id);
 		missionInfoDao.createMissionInfo(mission);
 		
-		missionMap.put("mission_id", mission.getId());
-		missionMap.put("current_state","1");
-		missionMap.put("current_executor", mission.getExecutor());
+		missionMap.put("mission_id", id);
+		missionMap.put("curr_state","1");
+		missionMap.put("curr_executor", mission.getExecutor());
 		missionMap.put("id", UUID.randomUUID().toString());
 		missionInfoDao.saveCurrentMisson(missionMap);
 		
 	}
 
-	public void updateMissionInfo(MissionInfo Mission) {
-		// TODO Auto-generated method stub
-		
+	public List<MissionInfo> getMissionList(String userName,int currentPage,int pages,int pageSize) throws Exception {
+		return missionInfoDao.getMisList( userName, currentPage, pages, pageSize);
 	}
 
 }

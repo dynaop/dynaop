@@ -12,7 +12,7 @@ public class MissionInfo extends DomainObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String mission_name;
-	private String desc;
+	private String descr;
 	private String plan_time;
 	private String time_unit;
 	private String start_time;
@@ -22,6 +22,12 @@ public class MissionInfo extends DomainObject {
 	
 	private String executor;
 	
+	public String getDescr() {
+		return descr;
+	}
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
 	public String getExecutor() {
 		return executor;
 	}
@@ -33,12 +39,6 @@ public class MissionInfo extends DomainObject {
 	}
 	public void setMission_name(String mission_name) {
 		this.mission_name = mission_name;
-	}
-	public String getDesc() {
-		return desc;
-	}
-	public void setDesc(String desc) {
-		this.desc = desc;
 	}
 	public String getPlan_time() {
 		return plan_time;
