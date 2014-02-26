@@ -30,8 +30,8 @@
     <!-- 启用AspectJ形式的AOP，并强制指定直接代理目标对象。可参见AnnotationAwareAspectJAutoProxyCreator -->
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
-<!-- 配置数据源  本地链接方式-->
-<!--  <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+ <!-- ######## 配置数据源  本地链接方式 ############# -->
+  <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
  <property name="url" value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8"/>
  <property name="username" value="root"/>
@@ -43,11 +43,11 @@
   <property name="url" value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8"/>
  <property name="username" value="root"/>
   <property name="password" value="root"/> 
- </bean>      -->
+ </bean>      
+ <!-- ######## END 配置数据源  本地链接方式 ############# -->
  
- 
-<!--配置数据源  BAE链接方式 -->
- <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+<!-- ========= 配置数据源  BAE链接方式 ================ -->
+<!-- <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
  <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
   <property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr"/>
@@ -59,8 +59,9 @@
   <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
  <property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr"/>
   <property name="password" value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj"/>
- </bean> 
- 
+ </bean> -->
+<!-- =========END  配置数据源  BAE链接方式 ================ --> 
+
  	<!-- SqlMapClient配置 -->
 	<bean id="commonSqlMapClient" abstract="true">
 		<property name="configLocation" value="classpath:sqlMap-config.xml"/>

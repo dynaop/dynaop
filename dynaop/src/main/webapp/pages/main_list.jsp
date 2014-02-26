@@ -11,7 +11,7 @@
 <body class="easyui-layout" style="width:100%;height:100%;padding:0px">
 <!-- 顶部 -->
 	<div id="north" data-options="region:'north',border:false" style="height:62px;background:#B3DFDA;padding:0px"> 
-	<div id="out" class="row" style="width:100%;height:60px;background:#B3DFDA;padding:0px">
+	<div id="out" class="row" style="width:100%;height:60px;background:#B3DFDA;padding:0px" data-options=",fit:true">
 		<div id="logo" class="head_height col-md-3" style="width:70px;"><img src="${ctx}/images/sys_logo.jpg"/></div>
 		<div id="sys_name" class="head_height col-md-3" style="margin-left:15px" ><h3 style="color:blue">dynaop应用管理系统</h3></div>
 		<div id="user_info" class="head_height col-md-6" >
@@ -45,7 +45,7 @@
 	-->
 	<!-- 中间 -->
 	<div id="center" data-options="region:'center'" style="width:auto;heigt:auto!important;padding:0px"  >
-		<div id="tt" class="easyui-tabs"  data-options="tools:'#tab-tools'" style="width:auto;height:auto!important"></div>
+		<div id="tt" class="easyui-tabs"  data-options="tools:'#tab-tools',fit:true" style="width:auto;height:auto!important"></div>
 	</div>
 	<script type="text/javascript">
 	 $(function(){

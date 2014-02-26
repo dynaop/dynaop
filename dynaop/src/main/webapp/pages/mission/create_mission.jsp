@@ -8,7 +8,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>创建任务</title>
 <jsp:include page="../head.jsp"></jsp:include>
+<link href="${ctx}/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<link href="${ctx}/css/select2-3.4.5.css" rel="stylesheet" >
+<link href="${ctx}/css/use_0226.css" rel="stylesheet" >
 </head>
+<script type="text/javascript" src="${ctx}/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${ctx}/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${ctx}/js/select2-3.4.5.min.js" charset="UTF-8"></script>
+<script type="text/javascript">
+$(function() {
+	
+/* 	$("select.populate").each(function() { 
+		var e=$(this); 
+		var opts=e.html(), opts2="<option></option>"+opts;
+		alert(opts+"/"+opts2);
+		e.html(e.hasClass("placeholder")?opts2:opts); });*/
+	}); 
+
+
+$(document).ready(function() {
+	$("#time_unit").select2({ minimumResultsForSearch: -1 });
+	$("#e1").select2({ minimumResultsForSearch: -1 });
+}); 
+</script>
 <body>
 <s:property value="createResult"/>
 
@@ -20,39 +42,51 @@
 			<fieldset>
 			<div class="form-group">
 		         <label for="mission_name" class="col-md-2 control-label"><font style="color:red">*</font>任务名：</label>
-	         	 <input type="text" class="form-control col-md-2" id="mission_name" name="missionInfo.mission_name" required autofocus />
+	         	 <div class="col-md-8">
+	         	 	<input type="text" class="form-control col-md-2" id="mission_name" name="missionInfo.mission_name" required autofocus />
+	         	 </div>
+	        </div>
+	        <div class="form-group">
+		         <label for="mission_name" class="col-md-2 control-label">任务描述：</label>
+	         	 <div class="col-md-8 textarea">
+                 	<textarea class="text1" id="mission_desc" name="missionInfo.desc" ></textarea> 
+	         	 </div>
 	        </div>
 		    <div class="form-group">
 			<label for="plan_time" class="control-label col-md-2" >计划时长:</label>
-			<div class="col-md-1"><input type="text" class="form-control" id="plan_time" name="missionInfo.plan_time"  /></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="plan_time" name="missionInfo.plan_time"  /></div>
 			
 			<div class="col-md-2">
-				<select id="time_unit" name="missionInfo.time_unit" class="selectpicker form-control " >
+				<select id="time_unit" name="missionInfo.time_unit" class="populate select2-offscreen"  tabindex="-1">
 					<option value="1">人天</option>
 					<option value="2">人时</option>
 				</select>
 			</div>
+			</div>
+			<div class="form-group">
 				<label for="mission_level" class="control-label col-md-2">优先级:</label>
-			<div class="col-md-2">
-			<select id="mission_level" name="missionInfo.mission_level" class="selectpicker form-control">
-              <option value="1">重</option>
-              <option value="2">缓</option>
-            </select>
-			</div></div>
+			<div class="col-md-2 ">
+				<select id="e1" class="populate select2-offscreen "  tabindex="-1">
+					<option value="1">重</option>
+	              	<option value="2">缓</option>
+				</select></div>
+			</div>
 		    <div class="form-group">
 					<label for="start_time" class="control-label col-md-2">开始时间:</label>
 					<div class="col-md-3">
-						<div class="input-group date">
-						  <input type="text" class="form-control" id="start_time" name="missionInfo.start_time"><div class="input-group-addon">
-						  <i class="glyphicon glyphicon-th"></i></div>
-						</div>
+						<div id="start_time" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start_time" data-link-format="yyyymmdd">
+		                    <input class="form-control"  type="text" value="" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                		</div>
+						<input type="hidden" id="missionInfo.start_time" value="" /><br/>
 					</div>
 					<label for="end_time" class="control-label col-md-2">结束时间：</label>
 					<div class="col-md-3">
-						<div class="input-group date">
-						  <input type="text" class="form-control" id="end_time" name="missionInfo.end_time"><div class="input-group-addon">
-						  <i class="glyphicon glyphicon-th"></i></div>
-						</div>
+						<div id="end_time"  class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="end_time" data-link-format="yyyymmdd">
+		                    <input class="form-control" type="text" value="" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                		</div>
+						<input type="hidden" id="missionInfo.end_time" value="" /><br/>
 					</div>
 			</div>	  
 			<div class="form-group">
@@ -66,5 +100,39 @@
 		</form>
 		</div>
 	</div>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+	
 </body>
 </html>
