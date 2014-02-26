@@ -11,31 +11,36 @@
 		</layout>
 	</appender>
 	
-	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="/var/www/webapps/logs/demo/demo.log" />
-		<param name="DatePattern" value="'.'yyyy-MM-dd"/>
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="D:/Log/logs.log" />
+		<param name="MaxFileSize" value="1024KB"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss} [%c]-[%p] %m%n" />
 		</layout>
 	</appender>
 
+	<appender name="bae" class="com.baidu.bae.api.baelog.BaeAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c] [%p] - %m%n" />
+		</layout>
+	</appender>
 	
 	<logger name="org.springframework">
 		<level value="ERROR" />
 	</logger>
 	
 	<logger name="java.sql">
-		<level value="ERROR" />
+		<level value="debug" />
 	</logger>
 	
 
-	
+	<!-- 
 	<logger name="com.blueray.demo">
         <level value="WARN" />
-    </logger>
+    </logger> -->
 	
 	<root>
-		<level value="info" />
+		<level value="debug" />
 		<appender-ref ref="console" />
 		<appender-ref ref="file" />
 	</root>
