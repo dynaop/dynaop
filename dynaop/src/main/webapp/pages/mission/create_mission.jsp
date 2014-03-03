@@ -27,7 +27,7 @@ $(function() {
 
 
 $(document).ready(function() {
-	$("#time_unit").select2({ minimumResultsForSearch: -1 });
+	$("#timeUnit").select2({ minimumResultsForSearch: -1 });
 	$("#e1").select2({ minimumResultsForSearch: -1 });
 }); 
 </script>
@@ -43,50 +43,48 @@ $(document).ready(function() {
 			<div class="form-group">
 		         <label for="mission_name" class="col-md-2 control-label"><font style="color:red">*</font>任务名：</label>
 	         	 <div class="col-md-8">
-	         	 	<input type="text" class="form-control col-md-2" id="mission_name" name="missionInfo.mission_name" required autofocus />
+	         	 	<input type="text" class="form-control col-md-2" id="mission_name" name="missionInfo.missionName" required autofocus />
 	         	 </div>
 	        </div>
 	        <div class="form-group">
 		         <label for="mission_name" class="col-md-2 control-label">任务描述：</label>
 	         	 <div class="col-md-8 textarea">
-                 	<textarea class="text1" id="mission_desc" name="missionInfo.desc" ></textarea> 
+                 	<textarea class="text1" id="missionDesc" name="missionInfo.descr" ></textarea> 
 	         	 </div>
 	        </div>
 		    <div class="form-group">
 			<label for="plan_time" class="control-label col-md-2" >计划时长:</label>
-			<div class="col-md-2"><input type="text" class="form-control" id="plan_time" name="missionInfo.plan_time"  /></div>
+			<div class="col-md-2"><input type="text" class="form-control" id="planTime" name="missionInfo.planTime"  /></div>
 			
 			<div class="col-md-2">
-				<select id="time_unit" name="missionInfo.time_unit" class="populate select2-offscreen"  tabindex="-1">
+				<select id="timeUnit" name="missionInfo.timeUnit" class="populate select2-offscreen"  tabindex="-1">
 					<option value="1">人天</option>
 					<option value="2">人时</option>
 				</select>
 			</div>
 			</div>
 			<div class="form-group">
-				<label for="mission_level" class="control-label col-md-2">优先级:</label>
+				<label for="missionLevel" class="control-label col-md-2">优先级:</label>
 			<div class="col-md-2 ">
-				<select id="e1" class="populate select2-offscreen "  tabindex="-1">
+				<select id="e1" class="populate select2-offscreen " name="missionInfo.missionLevel"   tabindex="-1">
 					<option value="1">重</option>
 	              	<option value="2">缓</option>
 				</select></div>
 			</div>
 		    <div class="form-group">
-					<label for="start_time" class="control-label col-md-2">开始时间:</label>
+					<label for="startTime" class="control-label col-md-2">开始时间:</label>
 					<div class="col-md-3">
 						<div id="start_time" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start_time" data-link-format="yyyymmdd">
-		                    <input class="form-control"  type="text" value="" readonly>
-							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                		</div>
-						<input type="hidden" id="missionInfo.start_time" value="" /><br/>
+		                    <input class="form-control" id="missionInfo.startTime" name="missionInfo.startTime" type="text" value="" readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                		</div><br/>
 					</div>
 					<label for="end_time" class="control-label col-md-2">结束时间：</label>
 					<div class="col-md-3">
-						<div id="end_time"  class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="end_time" data-link-format="yyyymmdd">
-		                    <input class="form-control" type="text" value="" readonly>
-							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                		</div>
-						<input type="hidden" id="missionInfo.end_time" value="" /><br/>
+						<div id="endTime"  class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="end_time" data-link-format="yyyymmdd">
+		                    <input class="form-control" type="text" value="" id="missionInfo.endTime"  name="missionInfo.endTime"  readonly>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                		</div><br/>
 					</div>
 			</div>	  
 			<div class="form-group">
