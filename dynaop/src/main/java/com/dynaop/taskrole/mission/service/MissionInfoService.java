@@ -2,6 +2,7 @@ package com.dynaop.taskrole.mission.service;
 
 import java.util.List;
 
+import com.dynaop.taskrole.common.dao.Page;
 import com.dynaop.taskrole.mission.entity.MissionInfo;
 
 
@@ -22,7 +23,7 @@ public interface MissionInfoService {
 	 * @param userID
 	 * @throws Exception
 	 */
-	public List<MissionInfo> getMissionList(String userName,int currentPage,int pages,int pageSize) throws Exception ;
+	public List<MissionInfo> getMissionList(String userName,int currentPage,Page page,int pageSize) throws Exception ;
 	
 	
 }

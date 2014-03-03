@@ -28,10 +28,9 @@ public class MissionInfoDaoImpl extends MethodName4StatemenDaoHandler<MissionInf
 		this.save(map);
 	}
 
-	public List<MissionInfo> getMisList(String userName,int currentPage,int pages,int pageSize) {
+	public List<MissionInfo> getMisList(String userName,int currentPage,Page page,int pageSize) {
 		QueryParamsByUserName qpbu = new QueryParamsByUserName();
 		qpbu.setUserName(userName);
-		Page page = new Page(currentPage,pageSize);
 		qpbu.setPaging(page);
 		List<MissionInfo> list = this.query(qpbu);
 		return list;

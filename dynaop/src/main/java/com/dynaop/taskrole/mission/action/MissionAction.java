@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import com.alibaba.fastjson.JSON;
 import com.dynaop.taskrole.common.Constants;
 import com.dynaop.taskrole.common.action.BaseAction;
+import com.dynaop.taskrole.common.dao.Page;
 import com.dynaop.taskrole.mission.entity.MissionInfo;
 import com.dynaop.taskrole.mission.service.MissionInfoService;
 import com.opensymphony.xwork2.ActionContext;
@@ -28,6 +29,31 @@ public class MissionAction extends BaseAction {
 	private MissionInfo missionInfo;
 	private List<MissionInfo> missionList ;
 	private String createResult="";
+	
+	private int currentPage=1;
+//	页面显示条数
+	private int pageSize=10;
+//	总记录数
+	private int totalRecord;
+//	总页数
+	private int totalPages;
+	
+	public int getTotalRecord() {
+		return totalRecord;
+	}
+
+	public void setTotalRecord(int totalRecord) {
+		this.totalRecord = totalRecord;
+	}
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
 	public String getCreateResult() {
 		return createResult;
 	}
@@ -35,10 +61,6 @@ public class MissionAction extends BaseAction {
 	public void setCreateResult(String createResult) {
 		this.createResult = createResult;
 	}
-	private int pages=0;
-	private int currentPage=1;
-	private int pageSize=10;
-
 	public MissionInfoService getMissionInfoService() {
 		return missionInfoService;
 	}
@@ -47,13 +69,6 @@ public class MissionAction extends BaseAction {
 		this.missionInfoService = missionInfoService;
 	}
 
-	public int getPages() {
-		return pages;
-	}
-
-	public void setPages(int pages) {
-		this.pages = pages;
-	}
 
 	public int getPageSize() {
 		return pageSize;
@@ -114,7 +129,10 @@ public class MissionAction extends BaseAction {
 		Map<String,Object> sessionMap = ActionContext.getContext().getSession();
 		String userName = (String)sessionMap.get(Constants.sessionKey);
 		try {
-			missionList = missionInfoService.getMissionList(userName, currentPage, pages, pageSize);
+			Page page = new Page(currentPage,pageSize);
+			missionList = missionInfoService.getMissionList(userName, currentPage, page, pageSize);
+			totalRecord=page.getRecords();
+			totalPages=page.getPages();
 			return "success";
 		} catch (Exception e) {
 			e.printStackTrace();

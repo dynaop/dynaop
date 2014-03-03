@@ -7,7 +7,7 @@
  	
  	<insert id="createMissionInfo" parameterClass="mission">
  		insert into t_mission_info (id,mission_name,descr,plan_time,time_unit,start_time,end_time,mission_level,creator)
- 		values(#id#,#mission_name#,#descr:VARCHAR:NULL#,#plan_time#,#time_unit#,#start_time#,#end_time#,#mission_level#,#creator#)
+ 		values(#id#,#missionName#,#descr:VARCHAR:NULL#,#planTime#,#timeUnit#,#startTime#,#endTime#,#missionLevel#,#creator#)
  	</insert> 
  	
  	<insert id="saveCurrentMisson" parameterClass="java.util.HashMap">
@@ -17,12 +17,13 @@
  	
  	
  	<select id="getMisList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="mission">
- 		select i.ID,i.MISSION_NAME,i.CREATOR,i.MISSION_LEVEL,i.PLAN_TIME,i.TIME_UNIT,i.START_TIME,i.END_TIME,i.DESCR 
+ 		select i.ID,i.MISSION_NAME AS missionName,i.CREATOR,i.MISSION_LEVEL as missionLevel,i.PLAN_TIME as planTime,
+ 			i.TIME_UNIT as timeUnit,i.START_TIME as startTime,i.END_TIME as endTime,i.DESCR 
  		from t_mission_info i,t_mission_current c
 		where (i.CREATOR=#userName# or c.CURR_EXECUTOR=#userName#) 
 		and i.ID=c.MISSION_ID 
 		ORDER BY i.START_TIME DESC
-		LIMIT #paging.startRecord#,#paging.endRecord#
+		LIMIT #paging.startRecord#,#paging.pageSize#
  	</select>
  	<select id="getMisList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
  		select count(1)

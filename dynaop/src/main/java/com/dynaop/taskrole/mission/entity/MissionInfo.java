@@ -11,64 +11,64 @@ public class MissionInfo extends DomainObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String mission_name;
+	private String missionName;
 	private String descr;
-	private String plan_time;
-	private String time_unit;
-	private String start_time;
-	private String end_time;
-	private String mission_level;
+	private String planTime;
+	private String timeUnit;
+	private String startTime;
+	private String endTime;
+	private String missionLevel;
 	private String creator;
 	
 	private String executor;
 	
+	public String getMissionName() {
+		return missionName;
+	}
+	public void setMissionName(String missionName) {
+		this.missionName = missionName;
+	}
 	public String getDescr() {
 		return descr;
 	}
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
+	public String getPlanTime() {
+		return planTime;
+	}
+	public void setPlanTime(String planTime) {
+		this.planTime = planTime;
+	}
+	public String getTimeUnit() {
+		return timeUnit;
+	}
+	public void setTimeUnit(String timeUnit) {
+		this.timeUnit = timeUnit;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getMissionLevel() {
+		return missionLevel;
+	}
+	public void setMissionLevel(String missionLevel) {
+		this.missionLevel = missionLevel;
+	}
 	public String getExecutor() {
 		return executor;
 	}
 	public void setExecutor(String executor) {
 		this.executor = executor;
-	}
-	public String getMission_name() {
-		return mission_name;
-	}
-	public void setMission_name(String mission_name) {
-		this.mission_name = mission_name;
-	}
-	public String getPlan_time() {
-		return plan_time;
-	}
-	public void setPlan_time(String plan_time) {
-		this.plan_time = plan_time;
-	}
-	public String getTime_unit() {
-		return time_unit;
-	}
-	public void setTime_unit(String time_unit) {
-		this.time_unit = time_unit;
-	}
-	public String getStart_time() {
-		return start_time;
-	}
-	public void setStart_time(String start_time) {
-		this.start_time = start_time;
-	}
-	public String getEnd_time() {
-		return end_time;
-	}
-	public void setEnd_time(String end_time) {
-		this.end_time = end_time;
-	}
-	public String getMission_level() {
-		return mission_level;
-	}
-	public void setMission_level(String mission_level) {
-		this.mission_level = mission_level;
 	}
 	public String getCreator() {
 		return creator;

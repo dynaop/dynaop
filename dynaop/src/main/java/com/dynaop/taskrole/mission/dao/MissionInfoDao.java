@@ -3,6 +3,7 @@ package com.dynaop.taskrole.mission.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.dynaop.taskrole.common.dao.Page;
 import com.dynaop.taskrole.mission.entity.MissionInfo;
 
 
@@ -26,5 +27,5 @@ public interface MissionInfoDao {
 	 * @param userName
 	 * @return 
 	 */
-	public List<MissionInfo> getMisList(String userName,int currentPage,int pages,int pageSize);
+	public List<MissionInfo> getMisList(String userName,int currentPage,Page page,int pageSize);
 }
