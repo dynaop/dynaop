@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>  
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -19,62 +17,111 @@
 
 	<!-- 开启自动扫描 -->
 	<context:component-scan base-package="com.dynaop.taskrole">
-		<context:exclude-filter type="aspectj" expression="com.dynaop.taskrole.util..*"/>
-		<context:exclude-filter type="aspectj" expression="com.dynaop.taskrole.vo..*"/>
-		<context:exclude-filter type="aspectj" expression="com.dynaop.taskrole.constants..*"/>
+		<context:exclude-filter type="aspectj"
+			expression="com.dynaop.taskrole.util..*" />
+		<context:exclude-filter type="aspectj"
+			expression="com.dynaop.taskrole.vo..*" />
+		<context:exclude-filter type="aspectj"
+			expression="com.dynaop.taskrole.constants..*" />
 	</context:component-scan>
-	
+
 	<!-- 启用注解 -->
-    <context:annotation-config/>
-    
-    <!-- 启用AspectJ形式的AOP，并强制指定直接代理目标对象。可参见AnnotationAwareAspectJAutoProxyCreator -->
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:annotation-config />
 
- <!-- ######## 配置数据源  本地链接方式 ############# -->
-  <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
- <property name="url" value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8"/>
- <property name="username" value="root"/>
-  <property name="password" value="root"/> 
- </bean>  
+	<!-- 启用AspectJ形式的AOP，并强制指定直接代理目标对象。可参见AnnotationAwareAspectJAutoProxyCreator -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 
- <bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-  <property name="url" value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8"/>
- <property name="username" value="root"/>
-  <property name="password" value="root"/> 
- </bean>      
- <!-- ######## END 配置数据源  本地链接方式 ############# -->
- 
-<!-- ========= 配置数据源  BAE链接方式 ================ -->
-<!-- <bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
- <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
-  <property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr"/>
-  <property name="password" value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj"/>
- </bean> 
-
- <bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-  <property name="url" value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX"/>
- <property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr"/>
-  <property name="password" value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj"/>
- </bean> -->
-<!-- =========END  配置数据源  BAE链接方式 ================ --> 
-
- 	<!-- SqlMapClient配置 -->
-	<bean id="commonSqlMapClient" abstract="true">
-		<property name="configLocation" value="classpath:sqlMap-config.xml"/>
+	<!-- ######## 配置数据源 本地链接方式 ############# -->
+<!-- 	<bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
 	</bean>
- 
- <!-- 创建SqlMapClient对象 -->
- <bean id="readSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" parent="commonSqlMapClient">
-  <property name="dataSource" ref="readDataSource"/>
- </bean>
- 
-  <bean id="writeSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" parent="commonSqlMapClient">
-  <property name="dataSource" ref="writeDataSource"/>
- </bean>
- 
-    
+	<bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://192.168.1.103:3306/taskrole?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean> -->
+	<!-- ######## END 配置数据源 本地链接方式 ############# -->
+	
+	<!-- ========= 配置数据源 BAE链接方式 ================ -->
+	<bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX" />
+		<property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr" />
+		<property name="password" value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj" />
+	</bean>
+
+	<bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX" />
+		<property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr" />
+		<property name="password" value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj" />
+	</bean>
+	<!-- =========END 配置数据源 BAE链接方式 ================ -->
+	
+<!-- 		maxActive: 最大连接数量
+		<property name="maxActive" value="8" />
+		minIdle: 最小空闲连接
+		<property name="minIdle" value="2" />
+		maxIdle: 最大空闲连接
+		<property name="maxIdle" value="8" />
+		initialSize: 初始化连接
+		<property name="initialSize" value="4" />
+		连接被泄露时是否打印
+		<property name="logAbandoned" value="true" />
+		removeAbandoned: 是否自动回收超时连接
+		<property name="removeAbandoned" value="true" />
+		removeAbandonedTimeout: 超时时间(以秒数为单位)
+		<property name="removeAbandonedTimeout" value="10" />
+		maxWait: 超时等待时间以毫秒为单位 1000等于60秒
+		<property name="maxWait" value="1000" />
+		在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位.
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+		在每次空闲连接回收器线程(如果有)运行时检查的连接数量
+		<property name="numTestsPerEvictionRun" value="10" />
+		1000 * 60 * 30 连接在池中保持空闲而不被空闲连接回收器线程
+		<property name="minEvictableIdleTimeMillis" value="10000" />
+		<property name="validationQuery" value="SELECT NOW() FROM DUAL" /> -->
+	<!-- SqlMapClient配置 -->
+	<bean id="commonSqlMapClient" abstract="true">
+		<property name="configLocation" value="classpath:sqlMap-config.xml" />
+	</bean>
+
+	<!-- 创建SqlMapClient对象 -->
+	<bean id="readSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
+		parent="commonSqlMapClient">
+		<property name="dataSource" ref="readDataSource" />
+	</bean>
+
+	<bean id="writeSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"
+		parent="commonSqlMapClient">
+		<property name="dataSource" ref="writeDataSource" />
+	</bean>
+
+	<!-- <bean id="readDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+		<property name="driverClass" value="com.mysql.jdbc.Driver" /> <property name="jdbcUrl" 
+		value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX" /> <property 
+		name="user" value="Hd8VVbH2b8o05E6uto2SAoRr" /> <property name="password" 
+		value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj" /> <property name="autoCommitOnClose" 
+		value="true"/> <property name="checkoutTimeout" value="5000"/> <property 
+		name="initialPoolSize" value="6"/> <property name="minPoolSize" value="3"/> 
+		<property name="maxPoolSize" value="12"/> <property name="maxIdleTime" value="25200"/> 
+		<property name="acquireIncrement" value="3"/> <property name="maxIdleTimeExcessConnections" 
+		value="1800"/> </bean> <bean id="writeDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+		<property name="driverClass" value="com.mysql.jdbc.Driver" /> <property name="jdbcUrl" 
+		value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX" /> <property 
+		name="user" value="Hd8VVbH2b8o05E6uto2SAoRr" /> <property name="password" 
+		value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj" /> <property name="autoCommitOnClose" 
+		value="true"/> <property name="checkoutTimeout" value="5000"/> <property 
+		name="initialPoolSize" value="6"/> <property name="minPoolSize" value="3"/> 
+		<property name="maxPoolSize" value="12"/> <property name="maxIdleTime" value="25200"/> 
+		<property name="acquireIncrement" value="3"/> <property name="maxIdleTimeExcessConnections" 
+		value="1800"/> </bean> -->
 </beans>

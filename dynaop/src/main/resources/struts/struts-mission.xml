@@ -12,7 +12,7 @@
 		<action name="create" class="missionAction" method="createMission">
 			<result name="success">/pages/mission/create_mission.jsp</result>
 		</action>	
-		<action name="misList" class="missionAction" method="listMission">
+		<action name="mislist" class="missionAction" method="listMission">
 			<result name="success">/pages/mission/mission_list.jsp</result>
 		</action>					
 		<!--<action name="login" class="userLoginAction" method="login">

@@ -11,5 +11,5 @@ import com.dynaop.taskrole.user.entity.UserInfo;
  */
 public interface MenusService {
 	
-	public List<Map> getLeftMenuList(Map map);
+	public List<Map<String,Object>> getLeftMenuList(Map map);
 }

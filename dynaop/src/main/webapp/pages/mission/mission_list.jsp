@@ -89,20 +89,7 @@ $(document).ready(function(){
         pageUrl:function(type,page,current){
         	return "${ctx}/mission/misList.action?currentPage="+page;
         }
-       /*  onPageClicked: function(e,originalEvent,type,page){
-        	var currentTarget = $(e.currentTarget);
-        	//获取点击页码
-        	 currentTarget.bootstrapPaginator("show",page);
-            var pages = currentTarget.bootstrapPaginator("getPages");
-            var clickPage = pages.current;
-            $.ajax({
-            	url:"${ctx}/mission/misList.action?currentPage="+clickPage,
-            	success:function(data){
-            		$("#tbodyid").remove();
-            		$("#tableid").append("<tbody id='tbodyid' ><s:iterator value='missionList'  id='list'><tr><td><s:property value='#list.mission_name'/></td><td><s:property value='#list.mission_level'/></td><td><s:property value='#list.plan_time'/><s:if test='#list.time_unit=1'>人天</s:if><s:else>人时</s:else></td><td><s:property value='#list.start_time.substring(0,10)'/></td><td><s:property value='#list.end_time.substring(0,10)'/></td><td><s:property value='#list.creator'/></td></tr></s:iterator></tbody>");
-            	}
-            });
-        } */
+   
 	};
 	
 	element.bootstrapPaginator(options);

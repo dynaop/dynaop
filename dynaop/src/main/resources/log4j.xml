@@ -11,38 +11,48 @@
 		</layout>
 	</appender>
 	
-	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+<!-- 	<appender name="file" class="org.apache.log4j.RollingFileAppender">
 		<param name="File" value="D:/Log/logs.log" />
 		<param name="MaxFileSize" value="1024KB"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss} [%c]-[%p] %m%n" />
 		</layout>
-	</appender>
+	</appender> -->
 
-	<appender name="bae" class="com.baidu.bae.api.baelog.BaeAppender">
+<!-- 	<appender name="bae" class="com.baidu.bae.api.baelog.BaeAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c] [%p] - %m%n" />
 		</layout>
-	</appender>
+	</appender> -->
 	
-	<logger name="org.springframework">
-		<level value="ERROR" />
+	<!-- 本地配置 -->
+	<!-- <logger name="org.springframework">
+		<level value="debug" />
 	</logger>
 	
 	<logger name="java.sql">
 		<level value="debug" />
 	</logger>
 	
-
-	<!-- 
-	<logger name="com.blueray.demo">
-        <level value="WARN" />
-    </logger> -->
-	
 	<root>
 		<level value="debug" />
 		<appender-ref ref="console" />
 		<appender-ref ref="file" />
+	</root> -->
+	
+	<!-- BAE配置 -->
+	<logger name="org.springframework">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="java.sql">
+		<level value="warn" />
+	</logger>
+	
+	<root>
+		<level value="warn" />
+		<appender-ref ref="console" />
+		<!-- <appender-ref ref="file" /> -->
 	</root>
 	
 </log4j:configuration>

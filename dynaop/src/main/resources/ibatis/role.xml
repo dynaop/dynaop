@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.role.entity.RoleInfo">
+ 	<typeAlias alias="role" type="com.dynaop.taskrole.role.entity.RoleInfo"/>
+ 	
+ 	<insert id="createRoleInfo" parameterClass="role">
+ 		insert into t_role_info (role_id,role_name,role_desc)
+ 		values(#id#,#roleName#,#roleDesc:VARCHAR:NULL#)
+ 	</insert> 
+ 	
+ 	
+ 	<select id="getRoleList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="role">
+ 		select i.role_id as id,i.role_name AS roleName ,i.role_desc as roleDesc
+ 		from t_role_info i
+ 		where i.role_val = '1'
+		ORDER BY i.role_name DESC
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	<select id="getRoleList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+ 		select count(1)
+ 		from t_role_info i
+ 		where i.role_val = '1'
+		ORDER BY i.role_name DESC
+ 	</select>
+ 	
+ 	<!-- 标志位删除 	 -->
+ 	<update id="delRole" parameterClass="java.lang.String">
+ 		update t_role_info 
+ 		set role_val='0'
+ 		where role_id = #id#
+ 	</update>
+ 	
+ 	<update id="updateRole" parameterClass="role">
+ 		update t_role_info 
+ 		set role_name=#roleName#,role_desc=#roleDesc:VARCHAR:NULL#
+ 		where role_id = #id#
+ 	</update>
+ 	
+ 	<select id="getRoleAll" resultClass="role">
+ 		select i.role_id as id,i.role_name as roleName
+ 		from t_role_info i
+ 		where i.role_val='1'
+ 		order by i.role_name 
+ 	</select>
+ </sqlMap>

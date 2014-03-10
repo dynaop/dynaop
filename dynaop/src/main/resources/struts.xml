@@ -38,5 +38,7 @@
 	</package>
 	<include file="struts/struts-login.xml" />
 	<include file="struts/struts-main.xml" />
-	<include file="struts/struts-mission.xml"></include>
+	<include file="struts/struts-mission.xml" />
+	<include file="struts/struts-role.xml" />
+	<include file="struts/struts-org.xml" />
 </struts>

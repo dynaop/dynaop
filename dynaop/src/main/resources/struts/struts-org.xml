@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="org" extends="default" namespace="/organize">
+		
+		<action name="turn2org" class="orgAction" method="turn2Org">
+			<result name="success">/pages/organize/create_org.jsp</result>
+		</action>
+		
+		<action name="create" class="orgAction" method="createOrganization">
+			<result name="success">/pages/organize/create_org.jsp</result>
+		</action>	
+		<action name="orglist" class="orgAction" method="listOrg">
+			<result name="success">/pages/organize/org_list.jsp</result>
+		</action>					
+		
+		<action name="delorg" class="orgAction" method="delOrg">
+			<!-- <result name="success">/pages/organize/org_list.jsp</result> -->
+		</action>
+		
+		<action name="modorg" class="orgAction" method="updateOrg">
+			<result  name="success">/pages/organize/org_list.jsp</result>
+		</action>
+		
+		<action name="sinorg" class="orgAction" method="sinOrg">
+		</action>
+	</package> 
+</struts>

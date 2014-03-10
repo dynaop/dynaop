@@ -10,4 +10,6 @@
 	<sqlMap resource="ibatis/userinfo.xml" />
 	<sqlMap resource="ibatis/menuinfo.xml" />
 	<sqlMap resource="ibatis/mission.xml" />
+	<sqlMap resource="ibatis/role.xml" />
+	<sqlMap resource="ibatis/organize.xml" />
 </sqlMapConfig>

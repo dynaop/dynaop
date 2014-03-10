@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.organization.entity.OrgInfo">
+ 	<typeAlias alias="organize" type="com.dynaop.taskrole.organization.entity.OrgInfo"/>
+ 	
+ 	<insert id="createOrgInfo" parameterClass="organize">
+ 		insert into t_org_info (org_id,org_full_name,org_desc,org_parent_id)
+ 		values(#id#,#orgFname#,#orgDesc:VARCHAR:NULL#,#orgParentID#)
+ 	</insert> 
+ 	
+ 	<insert id="saveRelToRole"  parameterClass="java.util.HashMap">
+ 		insert into t_rel_org_role(id,org_id,role_id)
+ 		values(#relID#,#orgID#,#roleID#)
+ 	</insert>
+ 	
+ 	<update id="updateOrgInfo" parameterClass="organize">
+ 		update t_org_info 
+ 		set org_full_name = #orgFname#,org_desc = #orgDesc:VARCHAR:NULL#,org_parent_id = #orgParentID:VARCHAR:NULL#
+ 		where org_id = #id#
+ 	</update>
+ 	
+ 	<update id="updateRelToRole" parameterClass="organize">
+ 		update t_rel_org_role
+ 		set role_id = #roleID#
+ 		where id = #relID# 
+ 	</update>
+ 	
+ 	<delete id="deleteOrgInfo" parameterClass="java.lang.String">
+ 		delete from t_org_info
+ 		where org_id = #orgID#
+ 	</delete>
+ 	
+ 	<select id="getOrgByID" parameterClass="java.lang.String" resultClass="organize">
+ 		select id,orgFname,orgDesc,orgParentID,orgParentName,s2.roleID,s2.roleName,s2.relID
+		from (
+				select	i1.org_id as id,i1.org_full_name as orgFname,i1.ORG_PARENT_ID as orgParentID,
+						i1.org_desc as orgDesc,i2.ORG_FULL_NAME as orgParentName
+				from t_org_info i1 LEFT JOIN t_org_info i2 on i1.ORG_PARENT_ID=i2.ORG_ID where i1.ORG_ID = #orgID# ) s1 LEFT JOIN  (
+				SELECT t2.ROLE_ID as roleID,t2.ROLE_NAME as roleName,t1.id as relID,t1.ORG_ID 
+				from t_rel_org_role t1 LEFT JOIN t_role_info t2 on t1.ROLE_ID = t2.ROLE_ID
+				)s2 on s1.id=s2.ORG_ID 
+ 	</select>
+ 	
+ 	<select id="getOrgList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="organize">
+		select id,orgFname,orgDesc,orgParentID,orgParentName,s2.roleID,s2.roleName,s2.relID
+		from (
+				select	i1.org_id as id,i1.org_full_name as orgFname,i1.ORG_PARENT_ID as orgParentID,
+						i1.org_desc as orgDesc,i2.ORG_FULL_NAME as orgParentName
+				from t_org_info i1 LEFT JOIN t_org_info i2 on i1.ORG_PARENT_ID=i2.ORG_ID ) s1 LEFT JOIN  (
+				SELECT t2.ROLE_ID as roleID,t2.ROLE_NAME as roleName,t1.id as relID,t1.ORG_ID 
+				from t_rel_org_role t1 LEFT JOIN t_role_info t2 on t1.ROLE_ID = t2.ROLE_ID
+				)s2 on s1.id=s2.ORG_ID 
+		order by orgFname
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	<select id="getOrgList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+ 		select count(1)
+		from (
+				select	i1.org_id as id,i1.org_full_name as orgFname,i1.ORG_PARENT_ID as orgParentID,
+						i1.org_desc as orgDesc,i2.ORG_FULL_NAME as orgParentName
+				from t_org_info i1 LEFT JOIN t_org_info i2 on i1.ORG_PARENT_ID=i2.ORG_ID ) s1 LEFT JOIN  (
+				SELECT t2.ROLE_ID as roleID,t2.ROLE_NAME as roleName,t1.id as relID,t1.ORG_ID 
+				from t_rel_org_role t1 LEFT JOIN t_role_info t2 on t1.ROLE_ID = t2.ROLE_ID
+				)s2 on s1.id=s2.ORG_ID 
+		order by orgFname
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	
+ 	
+ 	<select id="getOrgAll" resultClass="organize">
+ 		select i.org_id as id,i.org_full_name as orgFname
+ 		from t_org_info i
+ 		order by i.org_full_name 
+ 	</select>
+ </sqlMap>
