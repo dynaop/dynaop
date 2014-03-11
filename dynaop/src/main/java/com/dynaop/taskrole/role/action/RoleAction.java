@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.dynaop.taskrole.common.Constants;
 import com.dynaop.taskrole.common.action.BaseAction;
 import com.dynaop.taskrole.common.dao.Page;
@@ -104,6 +105,14 @@ public class RoleAction extends BaseAction {
 	public String turn2Role(){
 		return "success";
 	}
+	/**
+	 * 为页面初始化提供角色列表json串
+	 */
+	public void getRoleListJSON(){
+		roleList = roleInfoService.getRoleAll();
+		this.sendJson(JSON.toJSONString(roleList));
+	}
+	
 	/**
 	 * 创建任务
 	 * @return

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.dynaop.taskrole.common.action.BaseAction;
+import com.dynaop.taskrole.common.util.LogUtils;
 import com.dynaop.taskrole.menus.service.MenusService;
 
 /**
@@ -23,6 +24,7 @@ public class MainAction extends BaseAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final LogUtils logger = LogUtils.getInstance(MainAction.class);
 	@Autowired
 	private MenusService menusService;
 	
@@ -38,19 +40,14 @@ public class MainAction extends BaseAction {
 	 */
 	public void menuTree(){
 		List<Map<String,Object>> menuList=null;
-		menuList = menuList = menusService.getLeftMenuList(null);
-		String menu=null;
-		if(menuList==null){
-			/*menu = "[{\"child\":[{\"menu_id\":\"01001\",\"menu_name\":\"任务列表\",\"menu_uri\":\"/mission/misList.action\"},{\"menu_id\":\"01002\",\"menu_name\":\"创建任务\",\"menu_uri\":\"/mission/turn2mission.action\"},{\"menu_id\":\"01003\",\"menu_name\":\"任务模板\",\"menu_uri\":\"http://www.baidu.com\"}],\"menu_id\":\"01000\",\"menu_name\":\"任务管理\"},{\"child\":[{\"menu_id\":\"02001\",\"menu_name\":\"当前团队列表\",\"menu_uri\":\"http://www.baidu.com\"},{\"menu_id\":\"02002\",\"menu_name\":\"所有团队列表\",\"menu_uri\":\"http://www.baidu.com\"},{\"menu_id\":\"02003\",\"menu_name\":\"团队管理\",\"menu_uri\":\"http://www.baidu.com\"}],\"menu_id\":\"02000\",\"menu_name\":\"团队管理\"},{\"child\":[{\"menu_id\":\"03001\",\"menu_name\":\"用户信息\",\"menu_uri\":\"http://www.baidu.com\"},{\"menu_id\":\"03002\",\"menu_name\":\"通用设置\",\"menu_uri\":\"http://www.baidu.com\"},{\"menu_id\":\"03003\",\"menu_name\":\"任务设置\",\"menu_uri\":\"http://www.baidu.com\"},{\"menu_id\":\"03004\",\"menu_name\":\"角色设置\",\"menu_uri\":\"http://www.baidu.com\"},{\"menu_id\":\"03005\",\"menu_name\":\"团队设置\",\"menu_uri\":\"http://www.baidu.com\"}],\"menu_id\":\"03000\",\"menu_name\":\"用户设置\"}]";
-			try {
-				menu = new String(menu.getBytes("GBK"),"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				
-			}*/
+		menuList = menusService.getLeftMenuList(null);
+		int i=0;
+		while(menuList==null){
 			menuList = menusService.getLeftMenuList(null);
-		}else{			
-			menu = JSON.toJSONString(menuList);
+			i++;
 		}
-		this.sendJson(menu);
+		System.out.println("==get menu times===="+i);
+		logger.info("==get menu times===="+i);
+		this.sendJson(JSON.toJSONString(menuList));
 	}
 }

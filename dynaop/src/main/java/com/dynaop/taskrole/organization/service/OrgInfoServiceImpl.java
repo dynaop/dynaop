@@ -52,7 +52,17 @@ public class OrgInfoServiceImpl implements OrgInfoService {
 
 	public void updateOrgInfo(OrgInfo org) {
 		orgInfoDao.updateOrgInfo(org);
-		orgInfoDao.updateRelToRole(org);
+		//没有与角色有关联关系的架构用插入方法
+		if(org.getRelID()==null||org.getRelID()==""){
+			Map<String,String> relMap = new HashMap<String,String>();
+			String relID = UUID.randomUUID().toString();
+			relMap.put("relID", relID);
+			relMap.put("orgID", org.getId());
+			relMap.put("roleID", org.getRelID());
+			orgInfoDao.saveRelToRole(relMap);
+		}else{
+			orgInfoDao.updateRelToRole(org);
+		}
 	}
 
 	public void deleteOrgInfo(String orgID) {

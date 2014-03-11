@@ -145,6 +145,21 @@ public class OrgAction extends BaseAction {
 		roleList = roleInfoService.getRoleAll();
 		return "success";
 	}
+	
+	public String turn2UpdateOrg(){
+		orgParentList = orgInfoService.getOrgAll();
+		roleList = roleInfoService.getRoleAll();
+		orgInfo = orgInfoService.getOrgByID(rid);
+		return "success";
+	}
+	/**
+	 * 为页面初始化上级列表提供json串
+	 */
+	public void getParentListJSON(){
+		orgParentList = orgInfoService.getOrgAll();
+		this.sendJson(JSON.toJSONString(orgParentList));
+	}
+	
 	/**
 	 * 创建组织架构
 	 * @return
