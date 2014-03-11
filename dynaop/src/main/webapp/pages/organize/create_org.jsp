@@ -45,12 +45,12 @@ $(document).ready(function() {
 					<div class="form-group">
 						<label for="orgParentID" class="control-label col-md-2">上级:</label>
 						<div class="col-md-5 ">
-							<select id="e1" class="populate select2-offscreen " name="orgInfo.orgParentID" tabindex="-1">
+							<select id="e1" class="populate select2-offscreen " style="width:60%"  name="orgInfo.orgParentID" tabindex="-1">
 							<s:if test="orgParentList == null||orgParentList.size<1">
-								<option value=""/>无上级</option>
+								<option value="">无上级</option>
 							</s:if>
 							<s:else>
-								<option value=""/>无上级</option>
+								<option value="">无上级</option>
 								<s:iterator value="orgParentList" id="list" status="index">
 									<option value="<s:property value="#list.id"/>"><s:property value="#list.orgFname" /></option>
 								</s:iterator>
@@ -62,11 +62,12 @@ $(document).ready(function() {
 					<div class="form-group">
 						<label for="roleID" class="control-label col-md-2">角色:</label>
 						<div class="col-md-5 ">
-							<select id="erole" class="populate select2-offscreen " id="orgInfo.roleID" name="orgInfo.roleID" tabindex="-1" >
+							<select id="erole" class="populate select2-offscreen "  style="width:60%"  id="orgInfo.roleID" name="orgInfo.roleID" tabindex="-1" >
 							<s:if test="roleList == null||roleList.size<1">
 								<option value="" >无角色</option>
 							</s:if>
 							<s:else>
+								<option value="" >无角色</option>
 								<s:iterator value="roleList" id="rlist" status="index">
 									<option value="<s:property value="#rlist.id"/>"><s:property value="#rlist.roleName" /></option>
 								</s:iterator>

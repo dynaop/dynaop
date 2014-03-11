@@ -7,28 +7,15 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/use_0226.css">
-<link href="${ctx}/css/select2-3.4.5.css" rel="stylesheet" >
-<title>任务</title>
+<title>组织架构</title>
 <jsp:include page="../head.jsp"></jsp:include>
 <script type="text/javascript" src="${ctx}/js/bootstrap-paginator.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/select2-3.4.5.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
 var op_id = undefined;
 function setOrgID(orgID){
 	op_id = orgID;
 	$('#modal4del').modal('show');
 }
-function setOrgID4mod(obj){
-	$('#modal4mod').modal('hide'); 
-	/* 	 $.get("${ctx}/organize/sinorg.action?rid="+obj,function(result){
-		 $('#orgName').val(result.orgFname);
-		 
-		});
-	 
-	
-
-	$('#modal4mod').modal('show');  */
-} 
 function delOrg(){
 	 if (op_id == undefined){return ;}
 	 $.get("${ctx}/organize/delorg.action?rid="+op_id,function(result){
@@ -46,7 +33,7 @@ function delOrg(){
 <span id="totalPages"><s:property value="totalPages"/></span>
 <span id="currentPage"><s:property value="currentPage"/></span> 
 </div>
- <legend>任务列表</legend>
+ <legend>组织机构列表</legend>
 	<table id="tableid" class="table table-condensed table-striped table-hover table-responsive">
 		<thead>
 			<tr>
@@ -62,7 +49,8 @@ function delOrg(){
 				<td><s:property value="#list.orgFname"/></td>
 				<td><s:property value="#list.orgParentName"/></td>
 				<td><s:property value="#list.roleName"/></td>
-				<td><a id="<s:property value="#list.id"/>" href="#modal4mod" onclick="setOrgID4mod(this.id);" role="button" class="btn" data-toggle="modal" data-target=".modal-4-mod">修改</a>
+				<td><a id="<s:property value="#list.id"/>" href="${ctx}/organize/turn2updateorg.action?rid=<s:property value="#list.id"/>&currentPage=${currentPage}"
+							role="button" class="btn" data-toggle="modal" data-target="#modal4mod">修改</a>
 					<a id="<s:property value="#list.id"/>" href="#modal4del" onclick="setOrgID('<s:property value="#list.id"/>');" role="button" class="btn" data-toggle="modal" data-target=".modal-4-del">删除</a>
 				</td>
 			</tr>
@@ -74,70 +62,8 @@ function delOrg(){
 	    <ul id='splitPage'></ul>
 	</div>
 	<div class="modal fade modal-4-mod" id="modal4mod" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form id="orgForm" class="form-horizontal" action="${ctx}/organize/modorg.action" method="post" >
-				<input type="hidden" name="currentPage" value="${currentPage}"> 
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabelmod">修改组织架构</h4>
-					</div>
-					<div class="modal-body">
-						<fieldset>
-							 <input type="hidden" id="orgID" name="orgInfo.id" value=""/>
-							 <div class="form-group">
-							 	 <label for="org_name" class="col-md-3 control-label"><font style="color:red">*</font>组织架构名：</label>
-							 	 <div class="col-md-7">
-	  								<input type="text" class="form-control col-md-3" id="orgName" name="orgInfo.orgName" required autofocus />
-							 	 </div>
-							 </div>
-							<div class="form-group">
-						<label for="orgDesc" class="col-md-2 control-label">架构描述：</label>
-						<div class="col-md-8 textarea">
-							<textarea class="text1" id="orgDesc" name="orgInfo.orgDesc"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="orgParentID" class="control-label col-md-2">上级:</label>
-						<div class="col-md-5 ">
-							<select id="e1" class="populate select2-offscreen " name="orgInfo.orgParentID" tabindex="-1">
-							<s:if test="orgParentList == null||orgParentList.size<1">
-								<option value=""/>无上级</option>
-							</s:if>
-							<s:else>
-								<option value=""/>无上级</option>
-								<s:iterator value="orgParentList" id="list" status="index">
-									<option value="<s:property value="#list.id"/>"><s:property value="#list.orgFname" /></option>
-								</s:iterator>
-							</s:else>
-							</select>
-							<input type="hidden" name="orgInfo.orgParentID" id="orgInfo.orgParentID"/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="roleID" class="control-label col-md-2">角色:</label>
-						<div class="col-md-5 ">
-							<select id="erole" class="populate select2-offscreen " id="orgInfo.roleID" name="orgInfo.roleID" tabindex="-1" >
-							<s:if test="roleList == null||roleList.size<1">
-								<option value="" >无角色</option>
-							</s:if>
-							<s:else>
-								<s:iterator value="roleList" id="rlist" status="index">
-									<option value="<s:property value="#rlist.id"/>"><s:property value="#rlist.roleName" /></option>
-								</s:iterator>
-							</s:else>
-							</select>
-							<input type="hidden" name="orgInfo.roleID" id="orgInfo.roleID"/>
-						</div>
-					</div>
-						</fieldset>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="submit" class="btn btn-primary" >确认</button>
-					</div><!-- onclick="modRole();" -->
-				</form>
-			</div>
+		<div class="modal-dialog" >
+			
 		</div>
 	</div>
 	
