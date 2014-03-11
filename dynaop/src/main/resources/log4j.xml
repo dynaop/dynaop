@@ -42,15 +42,15 @@
 	
 	<!-- BAE配置 -->
 	<logger name="org.springframework">
-		<level value="warn" />
+		<level value="error" />
 	</logger>
 	
 	<logger name="java.sql">
-		<level value="warn" />
+		<level value="error" />
 	</logger>
 	
 	<root>
-		<level value="warn" />
+		<level value="error" />
 		<appender-ref ref="console" />
 		<!-- <appender-ref ref="file" /> -->
 	</root>
