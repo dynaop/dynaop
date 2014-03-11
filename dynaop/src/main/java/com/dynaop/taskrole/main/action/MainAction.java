@@ -1,6 +1,5 @@
 package com.dynaop.taskrole.main.action;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
