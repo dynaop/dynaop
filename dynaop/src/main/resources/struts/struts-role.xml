@@ -23,5 +23,7 @@
 		<action name="modrole" class="roleAction" method="updateRole">
 			<result  name="success">/pages/role/role_list.jsp</result>
 		</action>
+		
+		<action name="rolelistjson" class="roleAction" method="getRoleListJSON"></action>
 	</package>
 </struts>

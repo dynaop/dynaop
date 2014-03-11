@@ -9,6 +9,10 @@
 			<result name="success">/pages/organize/create_org.jsp</result>
 		</action>
 		
+		<action name="turn2updateorg" class="orgAction" method="turn2UpdateOrg">
+			<result name="success">/pages/organize/up_org.jsp</result>
+		</action>
+		
 		<action name="create" class="orgAction" method="createOrganization">
 			<result name="success">/pages/organize/create_org.jsp</result>
 		</action>	
@@ -24,7 +28,8 @@
 			<result  name="success">/pages/organize/org_list.jsp</result>
 		</action>
 		
-		<action name="sinorg" class="orgAction" method="sinOrg">
-		</action>
+		<action name="sinorg" class="orgAction" method="sinOrg"></action>
+		
+		<action name="plistjson" class="orgAction" method="getParentListJSON"></action>
 	</package> 
 </struts>
