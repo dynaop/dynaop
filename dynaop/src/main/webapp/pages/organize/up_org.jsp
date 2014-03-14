@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>	
-<%@ include file="../common.jsp"%>
-<!DOCTYPE html>
-<html lang="utf-8">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>更新组织架构</title>
-<jsp:include page="../head.jsp"></jsp:include>
-<link href="${ctx}/css/use_0226.css" rel="stylesheet" >
-<link href="${ctx}/css/select2-3.4.5.css" rel="stylesheet" >
-</head>
-<script type="text/javascript" src="${ctx}/js/select2-3.4.5.min.js" charset="UTF-8"></script>
-<body>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 	<div class="modal-content col-md-7 col-md-offset-2">
 		<form id="roleForm" class="form-horizontal" action="${ctx}/organize/modorg.action" method="post" >
@@ -89,11 +77,9 @@
 			 </fieldset>
 		</form>
 		</div>
-</body>
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#e1").select2({ minimumResultsForSearch: -1 });
 	$("#erole").select2({ minimumResultsForSearch: -1 });
 }); 
 </script>
-</html>

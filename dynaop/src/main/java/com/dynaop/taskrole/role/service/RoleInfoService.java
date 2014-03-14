@@ -42,4 +42,14 @@ public interface RoleInfoService {
 	 * 获取角色的所有信息
 	 */
 	public List<RoleInfo> getRoleAll();
+	
+	/**
+	 * 获取设置的默认角色 ID 
+	 */
+	public String getDefRoleID();
+	
+	/**
+	 * 更新默认角色设置
+	 */
+	public void setDefRoleID(String roleID);
 }

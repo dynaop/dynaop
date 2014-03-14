@@ -10,6 +10,10 @@
  		values(#id#,#roleName#,#roleDesc:VARCHAR:NULL#)
  	</insert> 
  	
+ 	<insert id="createRoleUserRel" parameterClass="java.util.HashMap">
+ 		insert into t_rel_user_role (id,user_id,role_id)
+ 		values(#id#,#userID#,#roleID#);
+ 	</insert>
  	
  	<select id="getRoleList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="role">
  		select i.role_id as id,i.role_name AS roleName ,i.role_desc as roleDesc
@@ -44,4 +48,12 @@
  		where i.role_val='1'
  		order by i.role_name 
  	</select>
+ 	
+ 	<select id="getDefRoleID" resultClass="java.lang.String">
+ 		select states from t_property where name_en='default_role'
+ 	</select>
+ 	
+ 	<update id="updateDefRoleID" parameterClass="java.lang.String">
+ 		update t_property set states=#roleID# where name_en='default_role'
+ 	</update>
  </sqlMap>

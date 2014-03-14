@@ -30,6 +30,17 @@ public class RoleAction extends BaseAction {
 	private List<RoleInfo> roleList;
 	private String createResult="";
 	private RoleInfo roleInfo;
+	private String roleid; 
+	
+	
+	public String getRoleid() {
+		return roleid;
+	}
+
+	public void setRoleid(String roleid) {
+		this.roleid = roleid;
+	}
+
 	public RoleInfo getRoleInfo() {
 		return roleInfo;
 	}
@@ -45,6 +56,7 @@ public class RoleAction extends BaseAction {
 	private int totalRecord;
 //	总页数
 	private int totalPages;
+	
 	private String rid;
 	
 
@@ -87,7 +99,7 @@ public class RoleAction extends BaseAction {
 		return pageSize;
 	}
 
-	public void setPageSize(int pageSize) {
+	public void sSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
 
@@ -105,13 +117,33 @@ public class RoleAction extends BaseAction {
 	public String turn2Role(){
 		return "success";
 	}
+	
+	/**
+	 * 跳转到设置默认角色页面
+	 */
+	public String turn2Set(){
+		roleList = roleInfoService.getRoleAll();
+//		获取以前设置的默认角色id，并放到页面内显示
+		roleid = roleInfoService.getDefRoleID();
+		return "success";
+	}
+	
+	/**
+	 * 更新默认角色
+	 */
+	public String updateDefaultRole(){
+		roleInfoService.setDefRoleID(roleid);
+		turn2Set();
+		createResult="1";
+		return "success";
+	}
 	/**
 	 * 为页面初始化提供角色列表json串
 	 */
-	public void getRoleListJSON(){
+	/*public void getRoleListJSON(){
 		roleList = roleInfoService.getRoleAll();
 		this.sendJson(JSON.toJSONString(roleList));
-	}
+	}*/
 	
 	/**
 	 * 创建任务

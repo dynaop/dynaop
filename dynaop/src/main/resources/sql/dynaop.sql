@@ -216,17 +216,8 @@ CREATE TABLE `t_property` (
 -- ----------------------------
 -- Records of t_property
 -- ----------------------------
-INSERT INTO `t_property` VALUES ('misson_level', '1', '轻');
-INSERT INTO `t_property` VALUES ('misson_level', '2', '重');
-INSERT INTO `t_property` VALUES ('misson_level', '3', '缓');
-INSERT INTO `t_property` VALUES ('misson_level', '4', '急');
-INSERT INTO `t_property` VALUES ('mission_state', '1', '创建');
-INSERT INTO `t_property` VALUES ('mission_state', '2', '有效');
-INSERT INTO `t_property` VALUES ('mission_state', '3', '无效');
-INSERT INTO `t_property` VALUES ('mission_state', '4', '等待');
-INSERT INTO `t_property` VALUES ('mission_state', '5', '完成');
-INSERT INTO `t_property` VALUES ('time_unit', '1', '人天');
-INSERT INTO `t_property` VALUES ('time_unit', '2', '人时');
+INSERT INTO `t_property` VALUES ('default_role', '', '默认角色');
+
 
 -- ----------------------------
 -- Table structure for `t_rel_org_role`

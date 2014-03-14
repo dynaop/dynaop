@@ -1,6 +1,7 @@
 package com.dynaop.taskrole.role.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dynaop.taskrole.common.dao.Page;
 import com.dynaop.taskrole.role.entity.RoleInfo;
@@ -40,4 +41,18 @@ public interface RoleInfoDao {
 	 */
 	public List<RoleInfo> getRoleAll();
 	
+	/**
+	 * 获取默认角色设置 从 t_property表内的default_role项
+	 * @throws Exception 
+	 */
+	public String getDefRoleID() throws Exception;
+	/**
+	 * 更新默认角色设置
+	 */
+	public void updateDefRoleID(String roleID);
+	
+	/**
+	 * 创建用户与角色的关联关系
+	 */
+	public void createRoleUserRel(Map map);
 }

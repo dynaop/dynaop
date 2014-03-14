@@ -24,6 +24,12 @@
 			<result  name="success">/pages/role/role_list.jsp</result>
 		</action>
 		
-		<action name="rolelistjson" class="roleAction" method="getRoleListJSON"></action>
+		<action name="turn2roleset" class="roleAction" method="turn2Set">
+			<result  name="success">/pages/role/set_def_role.jsp</result>
+		</action>
+		
+		<action name="setdefault" class="roleAction" method="updateDefaultRole">
+			<result  name="success">/pages/role/set_def_role.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -1,6 +1,7 @@
 package com.dynaop.taskrole.role.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,18 @@ public class RoleInfoDaoImpl extends MethodName4StatemenDaoHandler<RoleInfo> imp
 
 	public List<RoleInfo> getRoleAll() {
 		return this.query((Object)null);
+	}
+
+	public String getDefRoleID() throws Exception {
+		return (String)this.getreadSqlMapClient().queryForObject(getQualifiedName("getDefRoleID"));
+	}
+
+	public void updateDefRoleID(String roleID) {
+		this.update(roleID);
+	}
+
+	public void createRoleUserRel(Map map) {
+		this.save(map);
 	}
 
 	

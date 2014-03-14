@@ -52,6 +52,7 @@ public class UserLoginAction extends BaseAction {
 			return Action.LOGIN;
 		}
 		sessionMap.put(Constants.sessionKey, userInfo.getUsername());
+		
 		return "main";
 	}
 	//注册界面初始化
@@ -62,6 +63,12 @@ public class UserLoginAction extends BaseAction {
 	public String reg(){
 		userInfoService.saveUserInfo(userInfo);
 		return SUCCESS;
+	}
+	
+	public String logout(){
+		Map<String,Object> sessionMap = ActionContext.getContext().getSession();
+		sessionMap.clear();
+		return "success";
 	}
 	
 /*	public void checkRegUser(){

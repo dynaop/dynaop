@@ -155,10 +155,10 @@ public class OrgAction extends BaseAction {
 	/**
 	 * 为页面初始化上级列表提供json串
 	 */
-	public void getParentListJSON(){
+/*	public void getParentListJSON(){
 		orgParentList = orgInfoService.getOrgAll();
 		this.sendJson(JSON.toJSONString(orgParentList));
-	}
+	}*/
 	
 	/**
 	 * 创建组织架构

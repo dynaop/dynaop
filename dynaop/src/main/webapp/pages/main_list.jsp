@@ -29,12 +29,12 @@
 				</div>	
 			</div>
 		</div>
-		<div id="exit" class="col-md-2 head_exit"><a href="">退出系统</a></div>
+		<div id="exit" class="col-md-2 head_exit"><a href="${ctx}/user/logout.action">退出系统</a></div>
 	</div>
 	
 	</div>
 	<!-- 左侧 -->
-	<div data-options="region:'west',split:true,title:'west'" style="width:250px;padding:0px;">
+	<div data-options="region:'west',split:true,title:'west',border:false" style="width:250px;padding:0px;">
 		<div id="menu" class="easyui-accordion" data-options="fit:true" style="width:250px;padding:0px;"></div>
 	</div>
 	<!-- 右侧 
@@ -44,7 +44,7 @@
 	<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
 	-->
 	<!-- 中间 -->
-	<div id="center" data-options="region:'center'" style="width:auto;heigt:auto!important;padding:0px"  >
+	<div id="center" data-options="region:'center',border:false" style="width:auto;heigt:auto!important;padding:0px"  >
 		<div id="tt" class="easyui-tabs"  data-options="tools:'#tab-tools',fit:true" style="width:auto;height:auto!important"></div>
 	</div>
 	<script type="text/javascript">

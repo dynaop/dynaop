@@ -15,6 +15,9 @@
 		<action name="reg" class="userLoginAction" method="reg">
 			<result name="success">/pages/user/login.jsp</result>
 		</action>
+		<action name="logout" class="userLoginAction" method="logout">
+			<result name="success">/pages/user/login.jsp</result>
+		</action>
 <!-- 		<action name="hasUser" class="userLoginAction" method="checkRegUser">
 			<result name="login">/pages/user/login.jsp</result>
 		</action> -->

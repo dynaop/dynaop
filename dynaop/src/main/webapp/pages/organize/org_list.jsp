@@ -7,9 +7,11 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/use_0226.css">
+<link href="${ctx}/css/select2-3.4.5.css" rel="stylesheet" >
 <title>组织架构</title>
 <jsp:include page="../head.jsp"></jsp:include>
 <script type="text/javascript" src="${ctx}/js/bootstrap-paginator.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/select2-3.4.5.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
 var op_id = undefined;
 function setOrgID(orgID){
@@ -24,7 +26,11 @@ function delOrg(){
 	    op_id = undefined;
 	});
 }
-
+$(document).ready(function() {
+$("#modal4mod").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
+});
+});
 </script>
 </head>
 <body>
@@ -63,7 +69,9 @@ function delOrg(){
 	</div>
 	<div class="modal fade modal-4-mod" id="modal4mod" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" >
+			<!--  -->
 			
+			<!--  -->
 		</div>
 	</div>
 	

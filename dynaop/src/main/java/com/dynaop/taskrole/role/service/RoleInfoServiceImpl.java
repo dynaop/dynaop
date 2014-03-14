@@ -45,4 +45,17 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 		return roleInfoDao.getRoleAll();
 	}
 
+	public String getDefRoleID() {
+		try {
+			return roleInfoDao.getDefRoleID();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	public void setDefRoleID(String roleID) {
+		roleInfoDao.updateDefRoleID(roleID);
+	}
+	
 }
