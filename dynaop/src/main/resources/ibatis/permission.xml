@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.permission.entity.PerInfo">
+ 	<typeAlias alias="permission" type="com.dynaop.taskrole.permission.entity.PerInfo"/>
+ 	
+ 	<insert id="savePerInfo" parameterClass="permission">
+ 		insert into t_per_info (per_id,per_name,per_desc,menu_ids)
+ 		values(#id#,#perName#,#perDesc:VARCHAR:NULL#,#menuIDS#)
+ 	</insert> 
+ 	<delete id="deletePerInfo" parameterClass="java.lang.String">
+ 		delete from t_per_info
+ 		where per_id = #perID#
+ 	</delete>
+ 	
+ 	<update id="updatePerInfo" parameterClass="permission">
+ 		update t_per_info 
+ 		set per_name = #perName#,per_desc = #perDesc:VARCHAR:NULL#,MENU_IDS = #menuIDS#
+ 		where per_id = #id#
+ 	</update>
+ 	
+ 	<select id="getPerList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="permission">
+		SELECT i.PER_ID as id,i.PER_NAME perName,i.PER_DESC perDesc,i.MENU_IDS menuIDS
+		FROM t_per_info i
+		order by PER_ID
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	<select id="getPerList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+ 		select count(1)
+		FROM t_per_info i
+		order by PER_ID
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	
+ 	<select id="getPerInfoByID" parameterClass="java.lang.String" resultClass="permission"> 
+ 		SELECT i.PER_ID as id,i.PER_NAME perName,i.PER_DESC perDesc,i.MENU_IDS menuIDS
+		FROM t_per_info i
+		WHERE i.per_id = #perID#
+ 	</select>
+ 	
+ 	<select id="getPerListAll" resultClass="permission"> 
+ 		SELECT i.PER_ID as id,i.PER_NAME perName
+		FROM t_per_info i
+ 	</select>
+ </sqlMap>

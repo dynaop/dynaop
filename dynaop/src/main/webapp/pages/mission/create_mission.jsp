@@ -32,7 +32,9 @@ $(document).ready(function() {
 }); 
 </script>
 <body>
-<s:property value="createResult"/>
+<s:if test='createResult == "1"'>
+<h4 class="form-signin-heading" style="color:red">创建任务成功！</h4>
+</s:if>
 
 	<div class="container">
 		<div class="col-md-offset-1 ">

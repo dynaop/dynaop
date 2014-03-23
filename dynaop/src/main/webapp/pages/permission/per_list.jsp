@@ -8,28 +8,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="${ctx}/css/use_0226.css">
 <link href="${ctx}/css/select2-3.4.5.css" rel="stylesheet" >
-<title>组织架构</title>
+<title>权限</title>
 <jsp:include page="../head.jsp"></jsp:include>
 <script type="text/javascript" src="${ctx}/js/bootstrap-paginator.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/select2-3.4.5.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
 var op_id = undefined;
-function setOrgID(orgID){
-	op_id = orgID;
+function setperID(perID){
+	op_id = perID;
 	$('#modal4del').modal('show');
 }
 function delOrg(){
 	 if (op_id == undefined){return ;}
-	 $.get("${ctx}/organize/delorg.action?rid="+op_id,function(result){
+	 $.get("${ctx}/permission/delper.action?rid="+op_id,function(result){
 	    $('#'+op_id+'').parent().parent().remove();
 	    $('#modal4del').modal('hide');
 	    op_id = undefined;
 	});
 }
 $(document).ready(function() {
-$("#modal4mod").on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-});
+	$("#modal4mod").on("hidden.bs.modal", function() {
+	    $(this).removeData("bs.modal");
+	});
 });
 </script>
 </head>
@@ -39,25 +39,21 @@ $("#modal4mod").on("hidden.bs.modal", function() {
 <span id="totalPages"><s:property value="totalPages"/></span>
 <span id="currentPage"><s:property value="currentPage"/></span> 
 </div>
- <legend>组织机构列表</legend>
+ <legend>权限列表</legend>
 	<table id="tableid" class="table table-condensed table-striped table-hover table-responsive">
 		<thead>
 			<tr>
-				<th style="align:center">组织机构名</th>
-				<th style="align:center">上级机构</th>
-				<th style="align:center">角色</th>
+				<th style="align:center">权限名</th>
 				<th style="align:center">操作</th>
 			</tr>
 		</thead>
 		<tbody id="tbodyid" >
-			<s:iterator value="orgList"  id="list" status="sta">
+			<s:iterator value="perList"  id="list" status="index">
 			<tr>
-				<td><s:property value="#list.orgFname"/></td>
-				<td><s:property value="#list.orgParentName"/></td>
-				<td><s:property value="#list.roleName"/></td>
-				<td><a id="<s:property value="#list.id"/>" href="${ctx}/organize/turn2updateorg.action?rid=<s:property value="#list.id"/>&currentPage=${currentPage}"
+				<td><s:property value="#list.perName"/></td>
+				<td><a id="<s:property value="#list.id"/>" href="${ctx}/permission/turn2updateper.action?rid=<s:property value="#list.id"/>&currentPage=${currentPage}"
 							role="button" class="btn" data-toggle="modal" data-target="#modal4mod">修改</a>
-					<a id="<s:property value="#list.id"/>" href="#modal4del" onclick="setOrgID('<s:property value="#list.id"/>');" role="button" class="btn" data-toggle="modal" data-target=".modal-4-del">删除</a>
+					<a id="<s:property value="#list.id"/>" href="#modal4del" onclick="setPerID('<s:property value="#list.id"/>');" per="button" class="btn" data-toggle="modal" data-target=".modal-4-del">删除</a>
 				</td>
 			</tr>
 			</s:iterator>
@@ -67,27 +63,27 @@ $("#modal4mod").on("hidden.bs.modal", function() {
 	<div style="align:center">
 	    <ul id='splitPage'></ul>
 	</div>
-	<div class="modal fade modal-4-mod" id="modal4mod" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" >
+	<div class="modal fade modal-4-mod" id="modal4mod" per="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
 			<!--  -->
 			
 			<!--  -->
 		</div>
 	</div>
 	
-	<div class="modal fade modal-4-del" id="modal4del" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade modal-4-del" id="modal4del" per="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title" id="myModalLabel">删除组织架构</h4>
+					<h4 class="modal-title" id="myModalLabel">删除权限</h4>
 				</div>
 				<div class="modal-body">
-					<h3>确认删除组织架构？</h3>
+					<h3>确认删除权限？</h3>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" onclick="delOrg();">确认</button>
+					<button type="button" class="btn btn-primary" onclick="delper();">确认</button>
 				</div>
 			</div>
 		</div>
@@ -134,7 +130,7 @@ $("#modal4mod").on("hidden.bs.modal", function() {
 				}
 			},
 			pageUrl : function(type, page, current) {
-				return "${ctx}/organize/orglist.action?currentPage=" + page;
+				return "${ctx}/per/perlist.action?currentPage=" + page;
 			}
 
 		};

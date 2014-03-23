@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="permission" extends="default" namespace="/permission">
+		
+		<action name="turn2per" class="perAction" method="turn2Per">
+			<result name="success">/pages/permission/create_per.jsp</result>
+		</action>
+		
+		<action name="create" class="perAction" method="createPer">
+			<result name="success">/pages/permission/create_per.jsp</result>
+		</action>	
+		<action name="perlist" class="perAction" method="listPer">
+			<result name="success">/pages/permission/per_list.jsp</result>
+		</action>					
+		<action name="delper" class="perAction" method="delPer">
+		</action>
+		<action name="modper" class="perAction" method="updatePer">
+			<result  name="success">/pages/permission/per_list.jsp</result>
+		</action>
+		<action name="turn2updateper" class="perAction" method="turn2Per" >
+			<result  name="success">/pages/permission/up_per.jsp</result>
+		</action>
+		
+	</package>
+</struts>

@@ -6,13 +6,14 @@
 <html lang="utf-8">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>创建任务</title>
+<title>创建角色</title>
 <jsp:include page="../head.jsp"></jsp:include>
 <link href="${ctx}/css/use_0226.css" rel="stylesheet" >
 </head>
 <body>
-<s:property value="createResult"/>
-
+<s:if test='createResult == "1"'>
+<h4 class="form-signin-heading" style="color:red">创建角色成功！</h4>
+</s:if>
 	<div class="container">
 		<div class="col-md-offset-1 ">
 			<h4 class="form-signin-heading">创建角色</h4>
