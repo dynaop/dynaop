@@ -16,4 +16,8 @@
  			</isNull>
  	</select>
  	
+ 	<select id="getMenusListAll" resultClass="menu" >
+ 		select  ID,MENU_ID,PARENT_ID,MENU_NAME_ZH,MENU_URI from t_menu
+ 		order by MENU_ID
+ 	</select>
  </sqlMap>

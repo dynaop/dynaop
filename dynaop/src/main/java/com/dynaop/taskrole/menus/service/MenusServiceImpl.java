@@ -91,6 +91,12 @@ public class MenusServiceImpl implements MenusService {
 		return minfoList;
 	}
 
+	public List<MenuInfo> getMenuListAll() {
+		
+		return menuLeftListDao.getMenusListAll();
+	}
+
+
 
 
 }

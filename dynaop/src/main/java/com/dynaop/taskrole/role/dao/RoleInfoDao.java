@@ -35,6 +35,19 @@ public interface RoleInfoDao {
 	 * @param role id
 	 */
 	public void delRole(String roleId);
+	/**
+	 * 删除角色与权限的关系表
+	 * @param roleID
+	 */
+	public void delRolePer(String roleID);
+	
+	/**
+	 * 通过roleID获取角色与权限的关系信息包括角色的基本信息与权限的基本信息
+	 * @param roleID
+	 * @return
+	 * @throws Exception 
+	 */
+	public Map<String,String> getRolePerByID(String roleID) throws Exception;
 	
 	/**
 	 * 获取所有有效角色的角色ID与名称
@@ -55,4 +68,16 @@ public interface RoleInfoDao {
 	 * 创建用户与角色的关联关系
 	 */
 	public void createRoleUserRel(Map map);
+	
+	/**
+	 * 获取角色与权限关系列表
+	 * @throws Exception 
+	 */
+	public List<Map<String,String>> getRolePerList(String userName,int currentPage,Page page,int pageSize) throws Exception;
+	
+	/**
+	 * 保存角色与权限关系表
+	 * @param map
+	 */
+	public void insertBatchRolePerRel(Map<String,String>[] maps);
 }

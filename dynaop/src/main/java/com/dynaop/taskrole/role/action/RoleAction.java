@@ -12,6 +12,10 @@ import com.alibaba.fastjson.JSON;
 import com.dynaop.taskrole.common.Constants;
 import com.dynaop.taskrole.common.action.BaseAction;
 import com.dynaop.taskrole.common.dao.Page;
+import com.dynaop.taskrole.menus.entity.MenuInfo;
+import com.dynaop.taskrole.menus.service.MenusService;
+import com.dynaop.taskrole.permission.entity.PerInfo;
+import com.dynaop.taskrole.permission.service.PermissionInfoService;
 import com.dynaop.taskrole.role.entity.RoleInfo;
 import com.dynaop.taskrole.role.service.RoleInfoService;
 import com.opensymphony.xwork2.ActionContext;
@@ -27,12 +31,41 @@ public class RoleAction extends BaseAction {
 	
 	@Autowired
 	private RoleInfoService roleInfoService;
+	@Autowired
+	private PermissionInfoService perService;
+	
 	private List<RoleInfo> roleList;
 	private String createResult="";
 	private RoleInfo roleInfo;
 	private String roleid; 
+	private List<Map<String,String>> storeList;
+	private Map<String,String> storeMap;
+	private List<PerInfo> perList;
 	
-	
+	public List<PerInfo> getPerList() {
+		return perList;
+	}
+
+	public void setPerList(List<PerInfo> perList) {
+		this.perList = perList;
+	}
+
+	public Map<String, String> getStoreMap() {
+		return storeMap;
+	}
+
+	public void setStoreMap(Map<String, String> storeMap) {
+		this.storeMap = storeMap;
+	}
+
+	public List<Map<String, String>> getStoreList() {
+		return storeList;
+	}
+
+	public void setStoreList(List<Map<String, String>> storeList) {
+		this.storeList = storeList;
+	}
+
 	public String getRoleid() {
 		return roleid;
 	}
@@ -125,6 +158,38 @@ public class RoleAction extends BaseAction {
 		roleList = roleInfoService.getRoleAll();
 //		获取以前设置的默认角色id，并放到页面内显示
 		roleid = roleInfoService.getDefRoleID();
+		return "success";
+	}
+	/**
+	 * 展现角色库列表，分页显示
+	 * @return
+	 */
+	public String trun2Stroe(){
+		Map<String,Object> sessionMap = ActionContext.getContext().getSession();
+		String userName = (String)sessionMap.get(Constants.sessionKey);
+		try {
+			Page page = new Page(currentPage,pageSize);
+			storeList = roleInfoService.getRolePerList(userName, currentPage, page, pageSize);
+			totalRecord=page.getRecords();
+			totalPages=page.getPages();
+			return "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	public String turn2sMod(){
+		String roleID = rid;
+		storeMap=roleInfoService.getRolePerByID(roleID);
+		perList = perService.getPerListAll();
+		return "success";
+	}
+	
+	public String modStore(){
+		storeMap.put("roleID", rid);
+		roleInfoService.saveRolePer(rid, storeMap);
+		trun2Stroe();
 		return "success";
 	}
 	

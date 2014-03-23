@@ -12,4 +12,5 @@
 	<sqlMap resource="ibatis/mission.xml" />
 	<sqlMap resource="ibatis/role.xml" />
 	<sqlMap resource="ibatis/organize.xml" />
+	<sqlMap resource="ibatis/permission.xml" />
 </sqlMapConfig>

@@ -41,4 +41,5 @@
 	<include file="struts/struts-mission.xml" />
 	<include file="struts/struts-role.xml" />
 	<include file="struts/struts-org.xml" />
+	<include file="struts/struts-permission.xml"/>
 </struts>

@@ -31,5 +31,17 @@
 		<action name="setdefault" class="roleAction" method="updateDefaultRole">
 			<result  name="success">/pages/role/set_def_role.jsp</result>
 		</action>
+		
+		<action name="trun2stroe" class="roleAction" method="trun2Stroe">
+			<result  name="success">/pages/role/store_list.jsp</result>
+		</action>
+		
+		<action name="turn2updatestore" class="roleAction" method="turn2sMod">
+			<result  name="success">/pages/role/up_store.jsp</result>
+		</action>
+		
+		<action name="modstore" class="roleAction" method="modStore">
+			<result  name="success">/pages/role/store_list.jsp</result>
+		</action>
 	</package>
 </struts>

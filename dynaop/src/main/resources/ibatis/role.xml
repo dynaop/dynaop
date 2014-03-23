@@ -56,4 +56,40 @@
  	<update id="updateDefRoleID" parameterClass="java.lang.String">
  		update t_property set states=#roleID# where name_en='default_role'
  	</update>
+
+	<delete id="delRolePer" parameterClass="java.lang.String">
+		delete from t_rel_per_role 
+		where role_id = #roleID#
+	</delete>
+
+	<select id="getRolePerList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName"  resultClass="java.util.HashMap" >
+		 SELECT r.ROLE_ID as roleID,r.ROLE_NAME as roleName,
+		 GROUP_CONCAT(p.PER_NAME SEPARATOR ',') as perNames,   GROUP_CONCAT(p.PER_ID SEPARATOR ',') as perIDS  
+		 from t_role_info r LEFT OUTER JOIN t_rel_per_role l on r.ROLE_ID=l.ROLE_ID   LEFT OUTER JOIN t_per_info p on p.PER_ID = l.PER_ID  
+		 where r.ROLE_VAL = '1'   
+		GROUP BY r.ROLE_ID  
+		 ORDER BY r.role_name DESC 
+		LIMIT #paging.startRecord#,#paging.pageSize#
+	</select>
+ 	<select id="getRolePerList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+		SELECT count(1)
+		from t_role_info r
+		where r.ROLE_VAL = '1'
+		ORDER BY r.role_name DESC
+	</select>
+	
+	<select id="getRolePerByID" parameterClass="java.lang.String"  resultClass="java.util.HashMap" >
+		SELECT r.ROLE_ID as roleID,r.ROLE_NAME as roleName,
+		GROUP_CONCAT(p.PER_NAME SEPARATOR ',') as perNames,
+		GROUP_CONCAT(p.PER_ID SEPARATOR ',') as perIDS
+		from t_role_info r LEFT OUTER JOIN t_rel_per_role l on r.ROLE_ID=l.ROLE_ID
+		LEFT OUTER JOIN t_per_info p on p.PER_ID = l.PER_ID
+		where r.ROLE_VAL = '1' and r.role_id = #roleID#
+		GROUP BY r.ROLE_ID
+		ORDER BY r.role_name DESC 
+	</select>
+	
+	<insert id="insertBatchRolePerRel" parameterClass="java.util.HashMap">
+		insert into t_rel_per_role (rel_id,role_id,per_id) values(#relID#,#roleID#,#perID#)	
+	</insert>
  </sqlMap>

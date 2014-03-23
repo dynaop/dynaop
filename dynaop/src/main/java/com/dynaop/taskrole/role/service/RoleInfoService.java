@@ -1,6 +1,7 @@
 package com.dynaop.taskrole.role.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dynaop.taskrole.common.dao.Page;
 import com.dynaop.taskrole.role.entity.RoleInfo;
@@ -27,6 +28,22 @@ public interface RoleInfoService {
 	public List<RoleInfo> getRoleList(String userName,int currentPage,Page page,int pageSize) throws Exception ;
 	
 	/**
+	 * 获取角色与权限关系，用于角色库列表
+	 * @param userName
+	 * @param currentPage
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Map<String,String>> getRolePerList(String userName,int currentPage,Page page,int pageSize);
+	
+	/**
+	 * 通过ID获得角色与权限的关系信息
+	 * @param roleID
+	 * @return
+	 */
+	public Map<String,String> getRolePerByID(String roleID);
+	/**
 	 * 更新角色信息
 	 * @param RoleInfo
 	 */
@@ -52,4 +69,10 @@ public interface RoleInfoService {
 	 * 更新默认角色设置
 	 */
 	public void setDefRoleID(String roleID);
+	
+	/**
+	 * 保存角色与权限的关系
+	 * @param map
+	 */
+	public void saveRolePer(String roleID,Map<String,String> map);
 }

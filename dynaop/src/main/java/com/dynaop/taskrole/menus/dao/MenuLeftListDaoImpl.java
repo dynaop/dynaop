@@ -19,6 +19,10 @@ public class MenuLeftListDaoImpl extends MethodName4StatemenDaoHandler<MenuInfo>
 		return this.query(map);
 	}
 
+	public List<MenuInfo> getMenusListAll() {
+		return this.queryEntities(null);
+	}
+
 
 	
 }

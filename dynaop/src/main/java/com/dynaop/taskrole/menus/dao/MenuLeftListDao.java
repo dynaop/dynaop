@@ -16,5 +16,11 @@ public interface MenuLeftListDao {
 	 * */
 	
 	public List<MenuInfo> getMenusList(Map map);
+	
+	/**
+	 * 获取菜单的所有列表，不分上下级
+	 * @return
+	 */
+	public List<MenuInfo> getMenusListAll();
 
 }

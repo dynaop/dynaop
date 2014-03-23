@@ -1,5 +1,6 @@
 package com.dynaop.taskrole.role.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,27 @@ public class RoleInfoDaoImpl extends MethodName4StatemenDaoHandler<RoleInfo> imp
 
 	public void createRoleUserRel(Map map) {
 		this.save(map);
+	}
+
+	public List<Map<String,String>> getRolePerList(String userName,int currentPage,Page page,int pageSize) throws Exception {
+		QueryParamsByUserName qpbu = new QueryParamsByUserName();
+		qpbu.setUserName(userName);
+		qpbu.setPaging(page);
+		return this.queryEntities(qpbu);
+	}
+
+	public void delRolePer(String roleID) {
+		this.delete(roleID);
+	}
+
+	public Map<String, String> getRolePerByID(String roleID) throws Exception {
+		Map<String, String> storeMap = (Map<String, String>) this.getreadSqlMapClient().queryForObject(getQualifiedName("getRolePerByID"), roleID);
+		return storeMap;
+	}
+
+
+	public void insertBatchRolePerRel(Map<String,String>[] maps) {
+		this.batch(maps, 8);
 	}
 
 	
