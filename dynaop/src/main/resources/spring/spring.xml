@@ -49,7 +49,7 @@
 	<!-- ######## END 配置数据源 本地链接方式 ############# -->
 	
 	<!-- ========= 配置数据源 BAE链接方式 ================ -->
-	<bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+<!-- 	<bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX" />
@@ -63,9 +63,25 @@
 			value="jdbc:mysql://sqld.duapp.com:4050/VYHfRoJKgYiCyGpyZetX" />
 		<property name="username" value="Hd8VVbH2b8o05E6uto2SAoRr" />
 		<property name="password" value="2lqi1tQPqQwetGe2TjMETffvhFDl9kpj" />
-	</bean>
+	</bean> -->
 	<!-- =========END 配置数据源 BAE链接方式 ================ -->
-	
+	<!-- ========= 配置数据源 OpenShit链接方式 ================ -->
+	<bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://127.10.88.130:3306/taskrolebranch?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="adminwgLnNsU" />
+		<property name="password" value="QvQrVQQcrxrm" />
+	</bean>
+
+	<bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://127.10.88.130:3306/taskrolebranch?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="adminwgLnNsU" />
+		<property name="password" value="QvQrVQQcrxrm" />
+	</bean>
+	<!-- =========END 配置数据源 OpenShit链接方式 ================ -->
 <!-- 		maxActive: 最大连接数量
 		<property name="maxActive" value="8" />
 		minIdle: 最小空闲连接
