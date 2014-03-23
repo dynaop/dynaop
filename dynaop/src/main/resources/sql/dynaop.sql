@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 103
-Source Server Version : 50535
-Source Host           : 192.168.1.103:3306
+Source Server         : localhost
+Source Server Version : 50519
+Source Host           : localhost:3306
 Source Database       : taskrole
 
 Target Server Type    : MYSQL
-Target Server Version : 50535
+Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2014-03-10 23:52:43
+Date: 2014-03-23 20:53:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,6 +25,10 @@ CREATE TABLE `t_info` (
   `createtime` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `t_login`
@@ -69,11 +73,15 @@ INSERT INTO `t_menu` VALUES ('14', '03005', '03000', 'Team Set', '团队设置',
 INSERT INTO `t_menu` VALUES ('15', '04000', null, 'RoleSet', '角色设置', null);
 INSERT INTO `t_menu` VALUES ('16', '04001', '04000', 'Create Role', '创建角色', '/role/turn2role.action');
 INSERT INTO `t_menu` VALUES ('17', '04002', '04000', 'Role List', '角色列表', '/role/rolelist.action');
-INSERT INTO `t_menu` VALUES ('18', '04003', '04000', 'Role Store', '角色库', 'http://www.baidu.com');
+INSERT INTO `t_menu` VALUES ('18', '04003', '04000', 'Role Store', '角色库', '/role/trun2stroe.action');
 INSERT INTO `t_menu` VALUES ('19', '05000', null, 'Organization', '组织机构管理', null);
 INSERT INTO `t_menu` VALUES ('2', '01001', '01000', 'Task List', '任务列表', '/mission/mislist.action');
 INSERT INTO `t_menu` VALUES ('20', '05001', '05000', 'Create Organization', '创建组织架构', '/organize/turn2org.action');
 INSERT INTO `t_menu` VALUES ('21', '05002', '05000', 'Organization List', '组织机构列表', '/organize/orglist.action');
+INSERT INTO `t_menu` VALUES ('22', '04004', '04000', 'set default role', '设置默认角色', '/role/turn2roleset.action');
+INSERT INTO `t_menu` VALUES ('23', '06000', null, 'Permission Manage', '权限管理', null);
+INSERT INTO `t_menu` VALUES ('24', '06001', '06000', 'Create Permission', '创建权限', '/permission/turn2per.action');
+INSERT INTO `t_menu` VALUES ('25', '06002', '06000', 'Permission List', '权限列表', '/permission/perlist.action');
 INSERT INTO `t_menu` VALUES ('3', '01002', '01000', 'Create Task', '创建任务', '/mission/turn2mission.action');
 INSERT INTO `t_menu` VALUES ('4', '01003', '01000', 'Task Template', '任务模板', 'http://www.baidu.com');
 INSERT INTO `t_menu` VALUES ('5', '02000', null, 'Team Management', '团队管理', null);
@@ -204,6 +212,25 @@ INSERT INTO `t_org_info` VALUES ('o3', '3', 'o1', null, null);
 INSERT INTO `t_org_info` VALUES ('o4', '4', 'o3', null, null);
 
 -- ----------------------------
+-- Table structure for `t_per_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_per_info`;
+CREATE TABLE `t_per_info` (
+  `PER_ID` varchar(64) NOT NULL COMMENT '权限ID',
+  `PER_NAME` varchar(100) NOT NULL COMMENT '权限名称',
+  `PER_DESC` varchar(256) DEFAULT NULL COMMENT '权限描述',
+  `MENU_IDS` varchar(256) NOT NULL COMMENT '菜单IDs  以英文逗号分隔',
+  PRIMARY KEY (`PER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_per_info
+-- ----------------------------
+INSERT INTO `t_per_info` VALUES ('1', '2123', '1342123', '01001, 01002');
+INSERT INTO `t_per_info` VALUES ('a0cb2e3f-f1c2-4fbe-abb0-a9a26e8555bb', 'qwerty发阿斯顿111', 'asdfsae1', '01001, 01003, 02001, 02002');
+INSERT INTO `t_per_info` VALUES ('d1c123ff-80d9-49f7-987b-6cc2df4ae851', '权限1', '权限描述1', '02001');
+
+-- ----------------------------
 -- Table structure for `t_property`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_property`;
@@ -217,7 +244,6 @@ CREATE TABLE `t_property` (
 -- Records of t_property
 -- ----------------------------
 INSERT INTO `t_property` VALUES ('default_role', '', '默认角色');
-
 
 -- ----------------------------
 -- Table structure for `t_rel_org_role`
@@ -239,6 +265,27 @@ CREATE TABLE `t_rel_org_role` (
 -- ----------------------------
 INSERT INTO `t_rel_org_role` VALUES ('r1', 'o2', '2');
 INSERT INTO `t_rel_org_role` VALUES ('r2', 'o4', '3');
+
+-- ----------------------------
+-- Table structure for `t_rel_per_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_rel_per_role`;
+CREATE TABLE `t_rel_per_role` (
+  `REL_ID` varchar(64) NOT NULL,
+  `ROLE_ID` varchar(64) NOT NULL COMMENT '角色ID',
+  `PER_ID` varchar(64) NOT NULL COMMENT '权限IDS,以英文逗号分隔',
+  PRIMARY KEY (`REL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_rel_per_role
+-- ----------------------------
+INSERT INTO `t_rel_per_role` VALUES ('1c211877-b52b-40d2-8f09-e4c59c4cb7c2', '9', 'd1c123ff-80d9-49f7-987b-6cc2df4ae851');
+INSERT INTO `t_rel_per_role` VALUES ('2d0fd53c-fbf1-432c-9853-b42018fd228a', '9', 'a0cb2e3f-f1c2-4fbe-abb0-a9a26e8555bb');
+INSERT INTO `t_rel_per_role` VALUES ('35250aea-20ad-41ca-a1f2-d627a90ca64f', 'aa85622b-1ebb-4ec3-ba9d-93eaa7b35cf0', ' a0cb2e3f-f1c2-4fbe-abb0-a9a26e8555bb');
+INSERT INTO `t_rel_per_role` VALUES ('af146816-10bd-4b99-9f08-057680f0321b', 'aa85622b-1ebb-4ec3-ba9d-93eaa7b35cf0', '1');
+INSERT INTO `t_rel_per_role` VALUES ('d2223f81-d715-43f3-9a76-c71d20f41739', 'aa85622b-1ebb-4ec3-ba9d-93eaa7b35cf0', ' d1c123ff-80d9-49f7-987b-6cc2df4ae851');
+INSERT INTO `t_rel_per_role` VALUES ('e7917956-bd72-49ee-b000-39dfc5a6b44c', '9', '1');
 
 -- ----------------------------
 -- Table structure for `t_rel_user_role`
@@ -302,7 +349,7 @@ CREATE TABLE `t_userinfo` (
   `USERNAME` varchar(80) NOT NULL COMMENT 'user name',
   `EMAIL` varchar(100) DEFAULT '' COMMENT 'Email address',
   `QQ` varchar(40) DEFAULT '' COMMENT 'QQ',
-  `DEPT_ID` varchar(20) DEFAULT '' ,
+  `DEPT_ID` varchar(20) DEFAULT '',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
