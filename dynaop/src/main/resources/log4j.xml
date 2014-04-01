@@ -26,7 +26,7 @@
 	</appender> -->
 	
 	<!-- 本地配置 -->
-	<!-- <logger name="org.springframework">
+	<logger name="org.springframework">
 		<level value="debug" />
 	</logger>
 	
@@ -38,9 +38,9 @@
 		<level value="debug" />
 		<appender-ref ref="console" />
 		<appender-ref ref="file" />
-	</root> -->
+	</root>
 	
-	<!-- BAE配置 -->
+	<!-- BAE配置 
 	<logger name="org.springframework">
 		<level value="error" />
 	</logger>
@@ -52,7 +52,7 @@
 	<root>
 		<level value="error" />
 		<appender-ref ref="console" />
-		<!-- <appender-ref ref="file" /> -->
-	</root>
+		<!-- <appender-ref ref="file" /> 
+	</root>-->
 	
 </log4j:configuration>
