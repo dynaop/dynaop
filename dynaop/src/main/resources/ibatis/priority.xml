@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.mission.entity.PriorityInfo">
+ 	<typeAlias alias="pri" type="com.dynaop.taskrole.mission.entity.PriorityInfo"/>
+ 	
+ 	<insert id="createPriority" parameterClass="pri">
+ 		insert into t_miss_priority (id,MIS_PRIORITY_NAME,MIS_PRIORITY_DESC,CREATE_TIME)
+ 		values(#id#,#priName#,#priDesc:VARCHAR:NULL#,now())
+ 	</insert> 
+ 	
+ 	
+ 	<select id="getPriList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="pri">
+ 		select id,MIS_PRIORITY_NAME as priName,MIS_PRIORITY_DESC as priDesc,CREATE_TIME as createTime
+ 		from t_miss_priority 
+		ORDER BY CREATE_TIME DESC
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	<select id="getPriList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+ 		select count(1)
+ 		from t_miss_priority 
+		ORDER BY CREATE_TIME DESC
+ 	</select>
+ 	
+ 	<select id="getPriListAll" resultClass="java.util.HashMap">
+ 		select id,MIS_PRIORITY_NAME as priName
+ 		from t_miss_priority 
+ 		ORDER BY CREATE_TIME DESC
+ 	</select>
+ 	
+ 	<delete id="deletePri" parameterClass="java.lang.String">
+ 		delete from t_miss_priority
+ 		where id=#priID#
+ 	</delete>
+ 	 
+ 	<update id="updatePri" parameterClass="pri">
+ 		update t_miss_priority
+ 		set MIS_PRIORITY_NAME = #priName#,MIS_PRIORITY_DESC=#priDesc:VARCHAR:NULL#,CREATE_TIME=now()
+ 		where id=#id#
+ 	</update>
+ 	
+ 	<select id="getPriByID" parameterClass="java.lang.String" resultClass="pri">
+ 		select id,MIS_PRIORITY_NAME as priName,MIS_PRIORITY_DESC as priDesc,CREATE_TIME as createTime
+ 		from t_miss_priority 
+ 		where id = #priID#
+ 	</select>
+ </sqlMap>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="userinfo" extends="default" namespace="/userinfo">
+<!-- 		跳转到用户列表页面 -->
+		<action name="turn2userlist" class="userAction" method="turn2UserList">
+			<result name="success">/pages/user/user_list.jsp</result>
+		</action>	
+		<!-- 跳转到修改用户页面 -->
+		<action name="turn2updateuser" class="userAction" method="turn2Up">
+			<result name="success">/pages/user/up_user.jsp</result>
+		</action>
+		<!-- 修改用户操作 -->
+		<action name="moduser" class="userAction" method="modUser">
+			<result name="success">/pages/user/user_list.jsp</result>
+		</action>
+		<!-- 删除用户 -->
+		<action name="deluser" class="userAction" method="delUser">
+		</action>
+	</package>
+</struts>

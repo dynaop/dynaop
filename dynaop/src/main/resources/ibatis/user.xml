@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+ <sqlMap namespace="com.dynaop.taskrole.userinfo.entity.UserBaseInfo">
+ 	<typeAlias alias="userinfo" type="com.dynaop.taskrole.userinfo.entity.UserBaseInfo"/>
+ 	
+ 	
+ 	<select id="getUserList" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="userinfo">
+ 		select l.USERNAME as username,u.ID as id,u.LONGIN_ID as loginId,u.EMAIL as email,u.QQ as qq
+		from t_login l LEFT JOIN t_userinfo u on l.ID = u.LONGIN_ID
+		 ORDER BY l.USERNAME DESC 
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	
+ 	<select id="getUserList_count" parameterClass="com.dynaop.taskrole.common.entity.QueryParamsByUserName" resultClass="java.lang.Integer">
+ 		select count(1)
+		from t_login l LEFT JOIN t_userinfo u on l.ID = u.LONGIN_ID
+		 ORDER BY l.USERNAME DESC 
+		LIMIT #paging.startRecord#,#paging.pageSize#
+ 	</select>
+ 	
+ 	<update id="updateUser" parameterClass="userinfo">
+ 		update t_userinfo
+ 		set email=#email#,qq=#qq#
+ 		where LONGIN_ID = #loginId#
+ 	</update>
+ 	
+ 	<select id="getUserByID" parameterClass="java.lang.String" resultClass="userinfo">
+ 		select id,username,email,qq
+ 		from t_userinfo
+ 		where LONGIN_ID = #loginID#
+ 	</select>
+ 	
+ 	<delete id="delUser" parameterClass="java.lang.String">
+ 		DELETE from  t_userinfo
+		WHERE
+		LONGIN_ID = #loginID#
+ 	</delete>
+ 	
+ 	<delete id="delUserLogin" parameterClass="java.lang.String">
+ 		delete from t_login
+ 		where id=#loginID#
+ 	</delete>
+ </sqlMap>
