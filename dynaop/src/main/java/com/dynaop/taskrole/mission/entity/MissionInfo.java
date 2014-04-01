@@ -1,5 +1,7 @@
 package com.dynaop.taskrole.mission.entity;
 
+import java.util.Date;
+
 import com.dynaop.taskrole.common.entity.DomainObject;
 
 /**
@@ -15,12 +17,19 @@ public class MissionInfo extends DomainObject {
 	private String descr;
 	private String planTime;
 	private String timeUnit;
-	private String startTime;
-	private String endTime;
-	private String missionLevel;
+	private Date startTime;
+	private Date endTime;
+	private String missPriority;
 	private String creator;
-	
 	private String executor;
+	private String misParent;
+	
+	public String getMisParent() {
+		return misParent;
+	}
+	public void setMisParent(String misParent) {
+		this.misParent = misParent;
+	}
 	
 	public String getMissionName() {
 		return missionName;
@@ -46,23 +55,24 @@ public class MissionInfo extends DomainObject {
 	public void setTimeUnit(String timeUnit) {
 		this.timeUnit = timeUnit;
 	}
-	public String getStartTime() {
+	
+	public Date getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(String startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-	public String getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(String endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	public String getMissionLevel() {
-		return missionLevel;
+	public String getMissPriority() {
+		return missPriority;
 	}
-	public void setMissionLevel(String missionLevel) {
-		this.missionLevel = missionLevel;
+	public void setMissPriority(String missPriority) {
+		this.missPriority = missPriority;
 	}
 	public String getExecutor() {
 		return executor;

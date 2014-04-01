@@ -28,4 +28,11 @@ public interface MissionInfoDao {
 	 * @return 
 	 */
 	public List<MissionInfo> getMisList(String userName,int currentPage,Page page,int pageSize);
+	
+	/**
+	 * 获取所有的有效的任务列表
+	 * @return
+	 * @throws Exception 
+	 */
+	public List<MissionInfo> getMissListAll() throws Exception;
 }

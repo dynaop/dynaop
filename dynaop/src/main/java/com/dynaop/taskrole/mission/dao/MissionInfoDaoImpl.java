@@ -1,5 +1,6 @@
 package com.dynaop.taskrole.mission.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,10 @@ public class MissionInfoDaoImpl extends MethodName4StatemenDaoHandler<MissionInf
 		qpbu.setPaging(page);
 		List<MissionInfo> list = this.query(qpbu);
 		return list;
+	}
+
+	public List<MissionInfo> getMissListAll() throws Exception {
+		return  this.query((Object)null);
 	}
 
 	

@@ -36,12 +36,22 @@ public class MissionInfoServiceImpl implements MissionInfoService {
 		missionMap.put("curr_state","1");
 		missionMap.put("curr_executor", mission.getExecutor());
 		missionMap.put("id", UUID.randomUUID().toString());
+		missionMap.put("creator",mission.getCreator());
 		missionInfoDao.saveCurrentMisson(missionMap);
 		
 	}
 
 	public List<MissionInfo> getMissionList(String userName,int currentPage,Page page,int pageSize) throws Exception {
 		return missionInfoDao.getMisList( userName, currentPage, page, pageSize);
+	}
+
+	public List<MissionInfo> getMissListAll() {
+		try {
+			return missionInfoDao.getMissListAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

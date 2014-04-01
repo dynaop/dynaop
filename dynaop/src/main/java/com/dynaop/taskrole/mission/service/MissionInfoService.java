@@ -1,6 +1,7 @@
 package com.dynaop.taskrole.mission.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dynaop.taskrole.common.dao.Page;
 import com.dynaop.taskrole.mission.entity.MissionInfo;
@@ -25,5 +26,9 @@ public interface MissionInfoService {
 	 */
 	public List<MissionInfo> getMissionList(String userName,int currentPage,Page page,int pageSize) throws Exception ;
 	
-	
+	/**
+	 * 获取所有有效的任务的id和任务名称
+	 * @return List<Map<String,String>>
+	 */
+	public List<MissionInfo> getMissListAll();
 }
