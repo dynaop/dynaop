@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2014-03-23 20:53:53
+Date: 2014-04-01 13:20:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,7 +45,6 @@ CREATE TABLE `t_login` (
 -- Records of t_login
 -- ----------------------------
 INSERT INTO `t_login` VALUES ('1', 'ivan', '1');
-INSERT INTO `t_login` VALUES ('6c2d68cb-75dd-4847-a39a-55025bb95b14', 'alice', 'alice');
 
 -- ----------------------------
 -- Table structure for `t_menu`
@@ -65,7 +64,7 @@ CREATE TABLE `t_menu` (
 -- Records of t_menu
 -- ----------------------------
 INSERT INTO `t_menu` VALUES ('1', '01000', null, 'Task Management', '任务管理', null);
-INSERT INTO `t_menu` VALUES ('10', '03001', '03000', 'User Infomation', '用户信息', 'http://www.baidu.com');
+INSERT INTO `t_menu` VALUES ('10', '03001', '03000', 'User List', '用户列表', '/userinfo/turn2userlist.action');
 INSERT INTO `t_menu` VALUES ('11', '03002', '03000', 'Common Set', '通用设置', 'http://www.baidu.com');
 INSERT INTO `t_menu` VALUES ('12', '03003', '03000', 'Task Set', '任务设置', 'http://www.baidu.com');
 INSERT INTO `t_menu` VALUES ('13', '03004', '03000', 'Role Set', '角色设置', 'http://www.baidu.com');
@@ -82,6 +81,8 @@ INSERT INTO `t_menu` VALUES ('22', '04004', '04000', 'set default role', '设置
 INSERT INTO `t_menu` VALUES ('23', '06000', null, 'Permission Manage', '权限管理', null);
 INSERT INTO `t_menu` VALUES ('24', '06001', '06000', 'Create Permission', '创建权限', '/permission/turn2per.action');
 INSERT INTO `t_menu` VALUES ('25', '06002', '06000', 'Permission List', '权限列表', '/permission/perlist.action');
+INSERT INTO `t_menu` VALUES ('26', '01004', '01000', 'priority set', '任务优先级设置', '/mission/turn2priority.action');
+INSERT INTO `t_menu` VALUES ('27', '01005', '01000', 'priority list', '任务优先级列表', '/mission/prilist.action');
 INSERT INTO `t_menu` VALUES ('3', '01002', '01000', 'Create Task', '创建任务', '/mission/turn2mission.action');
 INSERT INTO `t_menu` VALUES ('4', '01003', '01000', 'Task Template', '任务模板', 'http://www.baidu.com');
 INSERT INTO `t_menu` VALUES ('5', '02000', null, 'Team Management', '团队管理', null);
@@ -110,9 +111,11 @@ CREATE TABLE `t_mission_current` (
 -- Records of t_mission_current
 -- ----------------------------
 INSERT INTO `t_mission_current` VALUES ('03371ee5-31bc-4e6f-9e74-6f80f6aac3f2', '4613613b-47da-4199-8309-81eb083ba34d', '1', '(瀹屾垚鐢ㄦ埛鐨勮鑹蹭互鍙婃潈闄愬悗琛ュ厖瀹屾暣)', '2014-02-23 22:30:34', '');
+INSERT INTO `t_mission_current` VALUES ('07de50f1-e699-40ae-8e22-a075ade0361d', '42bc3a87-4665-427f-b2b8-43c10fd839c8', '1', 'aa85622b-1ebb-4ec3-ba9d-93eaa7b35cf0', '2014-04-01 12:58:42', 'ivan');
 INSERT INTO `t_mission_current` VALUES ('20c4af47-15a4-4a53-a89b-620cf1b9a269', '52bd77ee-5737-435c-8bf9-f6752805b584', '1', 'ivan', '2014-02-23 17:38:49', '');
 INSERT INTO `t_mission_current` VALUES ('64fa6783-bfb2-4c3d-9bbb-ad7e68f9268f', 'd12f0695-699c-45b2-8863-08413b4af74d', '1', '(完成用户的角色以及权限后补充完整)', '2014-03-06 11:05:14', '');
 INSERT INTO `t_mission_current` VALUES ('77129ecb-4886-45c3-a796-ae63922d70a1', '55952efa-2b6f-433c-9f8a-c5039ca52a92', '1', '(完成用户的角色以及权限后补充完整)', '2014-02-23 22:27:39', '');
+INSERT INTO `t_mission_current` VALUES ('8c9216f6-5768-4aa6-a131-5fa7793570be', '30b7a405-5bc8-4892-aea5-607a9397098c', '1', '1', '2014-03-31 19:59:49', 'ivan');
 INSERT INTO `t_mission_current` VALUES ('955a9d7b-fd7c-4129-b2af-2da8b88d0006', '7831331b-06bc-4095-b9a5-484aa5ef3044', '1', 'aliceliu', '2014-02-23 17:58:52', '');
 INSERT INTO `t_mission_current` VALUES ('9f310bc8-1985-4ff3-b19d-4adbf4d71659', '8e772236-2822-4557-bce8-7fc476905dea', '1', 'ivan', '2014-02-23 17:56:36', '');
 INSERT INTO `t_mission_current` VALUES ('a6529bea-79f5-4158-a632-4c02a7fe6ee8', '1aad59ae-cf77-4a9c-87d2-c66f41b4bbae', '1', '(完成用户的角色以及权限后补充完整)', '2014-02-23 22:22:20', '');
@@ -159,35 +162,62 @@ CREATE TABLE `t_mission_history` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_mission_info`;
 CREATE TABLE `t_mission_info` (
-  `ID` varchar(100) NOT NULL COMMENT 'Mission''s id',
+  `ID` varchar(100) NOT NULL DEFAULT 'null' COMMENT 'Mission''s id',
   `MISSION_NAME` varchar(100) NOT NULL COMMENT 'Mission''s name',
   `DESCR` varchar(500) DEFAULT NULL COMMENT 'Describe the misson',
-  `PLAN_TIME` int(10) DEFAULT NULL COMMENT 'How long the mission task according to plan',
+  `PLAN_TIME` int(20) DEFAULT NULL COMMENT 'How long the mission task according to plan',
   `TIME_UNIT` tinyint(1) DEFAULT NULL COMMENT 'man day or man hour',
   `START_TIME` datetime NOT NULL COMMENT 'Misson start time',
   `END_TIME` datetime DEFAULT NULL COMMENT 'Mission end time',
-  `MISSION_LEVEL` tinyint(2) NOT NULL COMMENT 'Misson level',
+  `MISSION_PRIORITY` varchar(64) NOT NULL COMMENT 'Misson Priority',
   `CREATOR` varchar(64) NOT NULL COMMENT 'Which user''s id create this mission.',
   `PRE_MISSION` varchar(64) DEFAULT NULL COMMENT '前置任务',
+  `REAL_START_TIME` datetime NOT NULL,
+  `REAL_PLAN_TIME` int(20) DEFAULT NULL,
+  `EST_COM_PER` varchar(10) DEFAULT NULL COMMENT 'Estimated completion percentage 估计完成比例',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Recording mission''s information';
 
 -- ----------------------------
 -- Records of t_mission_info
 -- ----------------------------
-INSERT INTO `t_mission_info` VALUES ('03ff8a1f-c9ef-4a6b-87f9-dbcf9c1b1f7f', 'aa12', null, '4', '1', '2013-08-10 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('1aad59ae-cf77-4a9c-87d2-c66f41b4bbae', 'aa1', null, '4', '1', '2014-07-02 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('1bd2c123-2a8c-4976-8fb3-8cfd22498ad9', 'aa24', null, '4', '1', '2014-07-02 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('1e75a55b-9223-47cc-bf2c-a2527f2ed114', 'aa', null, '3', '1', '2013-08-10 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('277004a5-19c1-43a2-bc28-8beb1b9453a7', '韩国人凤飞飞v', '是否过几天', '3', '2', '2014-03-04 00:00:00', '2014-03-04 00:00:00', '2', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('4613613b-47da-4199-8309-81eb083ba34d', 'aa13', null, '4', '1', '2013-08-12 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('52bd77ee-5737-435c-8bf9-f6752805b584', 'aa', null, '3', '1', '2013-08-10 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('55952efa-2b6f-433c-9f8a-c5039ca52a92', 'aa2', null, '4', '1', '2013-08-10 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('71bdc82f-3f07-4356-b044-26f9bdf76ee4', 'aa21', null, '3', '1', '2013-08-10 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('7831331b-06bc-4095-b9a5-484aa5ef3044', 'aa', null, '3', '1', '2013-08-11 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('8e772236-2822-4557-bce8-7fc476905dea', 'aa', null, '3', '1', '2013-08-10 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('a1d339e4-bb58-4754-9839-bcd727b6164e', 'aa22', null, '4', '1', '2014-07-02 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null);
-INSERT INTO `t_mission_info` VALUES ('d12f0695-699c-45b2-8863-08413b4af74d', '收到1', '', '3', '1', '2014-03-04 00:00:00', '2014-03-06 00:00:00', '1', 'ivan', null);
+INSERT INTO `t_mission_info` VALUES ('03ff8a1f-c9ef-4a6b-87f9-dbcf9c1b1f7f', 'aa12', null, '4', '1', '2013-08-10 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('1aad59ae-cf77-4a9c-87d2-c66f41b4bbae', 'aa1', null, '4', '1', '2014-07-02 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('1bd2c123-2a8c-4976-8fb3-8cfd22498ad9', 'aa24', null, '4', '1', '2014-07-02 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('1e75a55b-9223-47cc-bf2c-a2527f2ed114', 'aa', null, '3', '1', '2013-08-10 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('277004a5-19c1-43a2-bc28-8beb1b9453a7', '韩国人凤飞飞v', '是否过几天', '3', '2', '2014-03-04 00:00:00', '2014-03-04 00:00:00', '2', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('30b7a405-5bc8-4892-aea5-607a9397098c', '收到122', 'ASDF', '3', '1', '2014-03-01 00:00:00', null, '8f50d276-1127-4126-b277-e7988f508318', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('42bc3a87-4665-427f-b2b8-43c10fd839c8', '收到3', '收到3', '20', '2', '2014-04-03 00:00:00', null, 'd9151ef6-2ad6-4f27-9379-30bf2430c3b8', 'ivan', null, '2014-04-03 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('4613613b-47da-4199-8309-81eb083ba34d', 'aa13', null, '4', '1', '2013-08-12 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('52bd77ee-5737-435c-8bf9-f6752805b584', 'aa', null, '3', '1', '2013-08-10 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('55952efa-2b6f-433c-9f8a-c5039ca52a92', 'aa2', null, '4', '1', '2013-08-10 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('6df32655-8436-4443-b5d3-457b845b6bdd', '任务1', '吃t1', '3', '1', '2014-02-26 00:00:00', null, '8f50d276-1127-4126-b277-e7988f508318', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('71bdc82f-3f07-4356-b044-26f9bdf76ee4', 'aa21', null, '3', '1', '2013-08-10 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('7831331b-06bc-4095-b9a5-484aa5ef3044', 'aa', null, '3', '1', '2013-08-11 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('8e772236-2822-4557-bce8-7fc476905dea', 'aa', null, '3', '1', '2013-08-10 00:00:00', '2013-09-10 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('a1d339e4-bb58-4754-9839-bcd727b6164e', 'aa22', null, '4', '1', '2014-07-02 00:00:00', '2014-07-06 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+INSERT INTO `t_mission_info` VALUES ('d12f0695-699c-45b2-8863-08413b4af74d', '收到1', '', '3', '1', '2014-03-04 00:00:00', '2014-03-06 00:00:00', '1', 'ivan', null, '0000-00-00 00:00:00', null, null);
+
+-- ----------------------------
+-- Table structure for `t_miss_priority`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_miss_priority`;
+CREATE TABLE `t_miss_priority` (
+  `ID` varchar(64) NOT NULL,
+  `MIS_PRIORITY_NAME` varchar(100) NOT NULL COMMENT '任务优先级名称',
+  `MIS_PRIORITY_DESC` varchar(200) DEFAULT NULL COMMENT '描述',
+  `CREATE_TIME` datetime NOT NULL COMMENT '创建时间，系统自动记录',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_miss_priority
+-- ----------------------------
+INSERT INTO `t_miss_priority` VALUES ('5517132a-6599-496f-bd12-58e4385fd286', '优先级2', '优先级2·2', '2014-03-31 16:44:37');
+INSERT INTO `t_miss_priority` VALUES ('8f50d276-1127-4126-b277-e7988f508318', '优先级4', '优先级4·42', '2014-04-01 13:07:09');
+INSERT INTO `t_miss_priority` VALUES ('a4b3a966-c262-43a0-be70-ed44c87b4f43', '优先级5', '重要优先级', '2014-04-01 13:06:48');
+INSERT INTO `t_miss_priority` VALUES ('d9151ef6-2ad6-4f27-9379-30bf2430c3b8', '优先级1', '优先级1··1', '2014-03-31 16:43:19');
+INSERT INTO `t_miss_priority` VALUES ('eeeb88c3-2d0b-4cd0-a55c-d1677cb117eb', '优先级3', '优先级3·3', '2014-03-31 17:43:08');
 
 -- ----------------------------
 -- Table structure for `t_org_info`
@@ -356,5 +386,4 @@ CREATE TABLE `t_userinfo` (
 -- ----------------------------
 -- Records of t_userinfo
 -- ----------------------------
-INSERT INTO `t_userinfo` VALUES ('888be5cc-30bf-4b10-81de-4ab61b161353', '6c2d68cb-75dd-4847-a39a-55025bb95b14', 'alice', '', '', null);
-INSERT INTO `t_userinfo` VALUES ('dsfrtweer', '1324567890', 'ivanhuang', 'huangjianghua81@163.com', '', '');
+INSERT INTO `t_userinfo` VALUES ('1', '1', 'ivan', '11huangjianghua81@163.com', '111', '');

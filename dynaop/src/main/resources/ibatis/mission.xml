@@ -5,9 +5,10 @@
  <sqlMap namespace="com.dynaop.taskrole.mission.entity.MissionInfo">
  	<typeAlias alias="mission" type="com.dynaop.taskrole.mission.entity.MissionInfo"/>
  	
+ 	<!-- 创建任务时实际开始时间=计划开始时间 -->
  	<insert id="createMissionInfo" parameterClass="mission">
- 		insert into t_mission_info (id,mission_name,descr,plan_time,time_unit,start_time,end_time,mission_priority,creator)
- 		values(#id#,#missionName#,#descr:VARCHAR:NULL#,#planTime#,#timeUnit#,#startTime#,#endTime:DATETIME:NULL#,#missPriority#,#creator#)
+ 		insert into t_mission_info (id,mission_name,descr,plan_time,time_unit,start_time,end_time,mission_priority,creator,REAL_START_TIME)
+ 		values(#id#,#missionName#,#descr:VARCHAR:NULL#,#planTime#,#timeUnit#,#startTime#,#endTime:DATETIME:NULL#,#missPriority#,#creator#,#startTime#)
  	</insert> 
  	
  	<insert id="saveCurrentMisson" parameterClass="java.util.HashMap">

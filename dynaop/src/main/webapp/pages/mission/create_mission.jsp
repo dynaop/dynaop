@@ -15,21 +15,27 @@
 <script type="text/javascript" src="${ctx}/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${ctx}/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${ctx}/js/select2-3.4.5.min.js" charset="UTF-8"></script>
-<script type="text/javascript">
-$(function() {
-	
-/* 	$("select.populate").each(function() { 
-		var e=$(this); 
-		var opts=e.html(), opts2="<option></option>"+opts;
-		alert(opts+"/"+opts2);
-		e.html(e.hasClass("placeholder")?opts2:opts); });*/
-	}); 
+<script type="text/javascript" src="${ctx}/js/bootstrap3-validation.js" charset="UTF-8"></script>
 
+<script type="text/javascript">
+$(function(){
+$("#misForm").validation();
+$("#sub").on('click',function(event){
+    if ($("#misForm").valid()==false){
+      $("#error-text").text("填写信息不完整。");
+      return false;
+      }
+  });
+});
 
 $(document).ready(function() {
-	$("#timeUnit").select2({ minimumResultsForSearch: -1 });
-	$("#e1").select2({ minimumResultsForSearch: -1 });
+	$('#timeUnit').select2({ minimumResultsForSearch: -1 });
+	$('#priority').select2();
+	$('#executor').select2();
+	$('#misParent').select2();
 }); 
+
+
 </script>
 <body>
 <s:if test='createResult == "1"'>
@@ -39,13 +45,13 @@ $(document).ready(function() {
 	<div class="container">
 		<div class="col-md-offset-1 ">
 			<h4 class="form-signin-heading">创建任务</h4>
-		<form id="misForm" class="form-horizontal" action="${ctx}/mission/create.action" method="post" >
+		<form id="misForm" class="form-horizontal"  action="${ctx}/mission/create.action" method="post" >
 		
 			<fieldset>
 			<div class="form-group">
 		         <label for="mission_name" class="col-md-2 control-label"><font style="color:red">*</font>任务名：</label>
 	         	 <div class="col-md-8">
-	         	 	<input type="text" class="form-control col-md-2" id="mission_name" name="missionInfo.missionName" required autofocus />
+	         	 	<input type="text" class="form-control col-md-2" id="mission_name" name="missionInfo.missionName" check-type="required"  autofocus />
 	         	 </div>
 	        </div>
 	        <div class="form-group">
@@ -54,63 +60,83 @@ $(document).ready(function() {
                  	<textarea class="text1" id="missionDesc" name="missionInfo.descr" ></textarea> 
 	         	 </div>
 	        </div>
-		    <div class="form-group">
-			<label for="plan_time" class="control-label col-md-2" >计划时长:</label>
-			<div class="col-md-2"><input type="text" class="form-control" id="planTime" name="missionInfo.planTime"  /></div>
-			
-			<div class="col-md-2">
-				<select id="timeUnit" name="missionInfo.timeUnit" class="populate select2-offscreen"  tabindex="-1">
-					<option value="1">人天</option>
-					<option value="2">人时</option>
+	        
+	        <div class="form-group">
+		         <label for="mission_parent" class="col-md-2 control-label">父任务：</label>
+	         	 <div class="col-md-5">
+                 	<select id="misParent" class="populate select2-offscreen "  style="width:56%"  name="missionInfo.misParent"   >
+                 		<option value='0'>根任务</option>
+					<s:iterator value="misspList" id="list" status="index">
+						<option value='<s:property value="#list.id"/>'><s:property value="#list.mission_name"/></option>
+					</s:iterator>
 				</select>
-			</div>
-			</div>
+	         	 </div>
+	        </div>
+
+					<div class="form-group">
+						<label for="plan_time" class="control-label col-md-2">计划时长:</label>
+						<div class="col-md-3">
+							<div id="pt">
+								<input type="text" class="form-control" id="planTime" check-type="required number" name="missionInfo.planTime" />
+							</div>
+							<br />
+						</div>
+						<div class="col-md-3">
+							<div id="tu">
+								<select id="timeUnit" name="missionInfo.timeUnit"  style="width:45%"  class="populate select2-offscreen" tabindex="-1">
+									<option value="1">人天</option>
+									<option value="2">人时</option>
+								</select>
+							</div>
+							<br />
+						</div>
+					</div>
 			<div class="form-group">
 				<label for="missionLevel" class="control-label col-md-2">优先级:</label>
-			<div class="col-md-2 ">
-				<select id="e1" class="populate select2-offscreen " name="missionInfo.missionLevel"   tabindex="-1">
-					<option value="1">重</option>
-	              	<option value="2">缓</option>
+			<div class="col-md-3">
+				<select id="priority" class="populate select2-offscreen "  style="width:100%"  name="missionInfo.missPriority" >
+					<s:iterator value="priList" id="plist">
+						<option value='<s:property value="#plist.id"/>'><s:property value="#plist.priName"/></option>
+					</s:iterator>
 				</select></div>
 			</div>
 		    <div class="form-group">
 					<label for="startTime" class="control-label col-md-2">开始时间:</label>
 					<div class="col-md-3">
-						<div id="start_time" class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start_time" data-link-format="yyyymmdd">
-		                    <input class="form-control" id="missionInfo.startTime" name="missionInfo.startTime" type="text" value="" readonly>
-							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						<div id="start_time" >
+		                    <input class="form-control form_date" id="startDate" check-type="date required" name="missionInfo.startTime" type="date" value="" >
                 		</div><br/>
 					</div>
 					<label for="end_time" class="control-label col-md-2">结束时间：</label>
 					<div class="col-md-3">
-						<div id="endTime"  class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="end_time" data-link-format="yyyymmdd">
-		                    <input class="form-control" type="text" value="" id="missionInfo.endTime"  name="missionInfo.endTime"  readonly>
-							<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						<div id="endTime" >
+		                    <input class="form-control form_date" id="endDate" check-type="date start-end-date"    name="missionInfo.endTime"   type="date" value="">
                 		</div><br/>
 					</div>
 			</div>	  
 			<div class="form-group">
-				<label for="executor" class="control-label col-md-2" >经办人</label>
-				<div class="col-md-3">
-					<input type="text" class="form-control" id="executor" name="missionInfo.executor" value="(完成用户的角色以及权限后补充完整)"/>
+				<label for="executor" class="control-label col-md-2" >经办人角色:</label>
+				<div class="col-md-5">
+				<select id="executor" class="populate select2-offscreen "  style="width:56%" name="missionInfo.executor"   >
+				<s:iterator value="roleList" id="list" status="index">
+					<option value='<s:property value="#list.id"/>'><s:property value="#list.roleName"/></option>
+				</s:iterator>
+				</select>
 				</div>
 			</div>
-			 <button type="submit" class="btn btn-default control-label">提交</button>
+			 <div class="form-group">
+			 <div class="col-md-2">
+			 	<button type="submit" id="sub" class="btn btn-default control-label">提交</button>
+			 </div>
+		        <div class="col-md-5">
+		          <span id="error-text" style="color: #FF0000;"></span>
+		        </div>
+		      </div>
 			 </fieldset>
 		</form>
 		</div>
 	</div>
 <script type="text/javascript">
-    $('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });
 	$('.form_date').datetimepicker({
         language:  'zh-CN',
         weekStart: 1,
@@ -119,17 +145,7 @@ $(document).ready(function() {
 		todayHighlight: 1,
 		startView: 2,
 		minView: 2,
-		forceParse: 0
-    });
-	$('.form_time').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 1,
-		minView: 0,
-		maxView: 1,
+		format: 'yyyy-mm-dd',
 		forceParse: 0
     });
 </script>

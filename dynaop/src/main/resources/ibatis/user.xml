@@ -22,7 +22,7 @@
  	
  	<update id="updateUser" parameterClass="userinfo">
  		update t_userinfo
- 		set email=#email#,qq=#qq#
+ 		set email=#email:VARCHAR:NULL#,qq=#qq:VARCHAR:NULL#
  		where LONGIN_ID = #loginId#
  	</update>
  	
